@@ -1,0 +1,20 @@
+﻿下面的统计条件(1.不编译MP3; 2.不编译WEBSERVER; 3.关闭DEBUG)
+单STA, 0级优化
+Program Size: Code=311268 RO-data=257920 RW-data=5832 ZI-data=8064  
+单STA, 2级优化
+Program Size: Code=231660 RO-data=257924 RW-data=5796 ZI-data=8068  
+
+单AP, 0级优化
+Program Size: Code=268384 RO-data=257876 RW-data=5240 ZI-data=8064    
+单AP, 2级优化
+Program Size: Code=202872 RO-data=257868 RW-data=5192 ZI-data=8064  
+
+AP+STA, 0级优化
+Program Size: Code=344636 RO-data=258060 RW-data=5968 ZI-data=8064  
+AP+STA, 2级优化
+Program Size: Code=255080 RO-data=258064 RW-data=5932 ZI-data=8068  
+
+下面的统计条件(0级优化)
+MP3模块占用flash资源约63KBYTE
+WEBSERVER占用flash资源约37KBYTE
+LWIP占用flash资源约67KBYTE

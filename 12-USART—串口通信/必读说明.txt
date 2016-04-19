@@ -1,0 +1,12 @@
+各程序简介：
+1-printf(polling)
+重定向printf函数到串口，使用轮询方式接收数据，使用USART1，USB TO UART接口。
+
+2-printf(polling)
+重定向printf函数到串口，使用中断方式接收数据，使用USART1，USB TO UART接口。
+
+3-USART1接发
+演示使用缓冲区接收数据，并对数据进行简单的命令分析，使用USART1，USB TO UART接口。
+
+4-RS232_USART2接发
+演示使用缓冲区接收数据，并对数据进行简单的命令分析，使用USART2，DB9接口,RS232电平。
