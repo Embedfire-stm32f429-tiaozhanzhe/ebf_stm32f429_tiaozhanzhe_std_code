@@ -147,6 +147,8 @@ static err_t tcp_echoclient_connected(void *arg, struct tcp_pcb *tpcb, err_t err
       es->pcb = tpcb;
       
 //      sprintf((char*)data, "sending tcp client message %d", message_count);
+			
+			//设置要发送的数据包内容
 			memset(data,'1',1024);
         
       /* allocate pbuf */
@@ -367,39 +369,11 @@ static err_t tcp_echoclient_poll(void *arg, struct tcp_pcb *tpcb)
 	
 	#else
 	
-	
+	//每次轮询都发送1024字节数据，对网速进行极限测试
 	tcp_write(tpcb, data, 1024, 1);
+  return ERR_OK;
 
-	
-//  err_t ret_err;
-//  struct echoclient *es;
 
-//  es = (struct echoclient*)arg;
-//  if (es != NULL)
-//  {
-//   if (es->p_tx != NULL)
-//    {
-//      /* there is a remaining pbuf (chain) , try to send data */
-//      tcp_echoclient_send(tpcb, es);
-//    }
-//    else
-//    {
-//      /* no remaining pbuf (chain)  */
-//      if(es->state == ES_CLOSING)
-//      {
-//        /* close tcp connection */
-//        tcp_echoclient_connection_close(tpcb, es);
-//      }
-//    }
-//    ret_err = ERR_OK;
-//  }
-//  else
-//  {
-//    /* nothing to be done */
-//    tcp_abort(tpcb);
-//    ret_err = ERR_ABRT;
-//  }
-//  return ret_err;
 	#endif
 }
 
