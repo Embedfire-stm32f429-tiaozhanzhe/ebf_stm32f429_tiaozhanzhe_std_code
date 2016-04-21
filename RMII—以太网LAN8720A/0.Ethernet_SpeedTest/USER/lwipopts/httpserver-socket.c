@@ -34,6 +34,7 @@
 #include "lwipopts/fsdata.h"
 #include "string.h"
 #include "lwipopts/httpserver-socket.h"
+#include "./sdram/bsp_sdram.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -252,8 +253,8 @@ static void http_server_socket_thread(void *arg)
 
 
 static char tcp_remote_ip[16] = "192.168.1.106"; /*remote ip address*/
-static int tcp_remote_port = 5000;               /*remote port*/
-char test[1024];
+static int tcp_remote_port = 6000;               /*remote port*/
+char test[1024] ;//__EXRAM;
 /*-----------------------------------------------------------------------------------*/
 static void tcpClientSpeedTest_thread(void *arg)
 {
@@ -262,6 +263,7 @@ static void tcpClientSpeedTest_thread(void *arg)
 	char *buf =NULL;
 	int optval = 1; 
 
+//		SDRAM_Test();
  /* create a TCP socket */
   if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) 
   {
@@ -270,7 +272,7 @@ static void tcpClientSpeedTest_thread(void *arg)
   }
 	printf("\r\nsocket success");
   
-	lwip_setsockopt(sock,SOL_SOCKET,SO_KEEPALIVE,&optval,sizeof(optval)); 
+//	lwip_setsockopt(sock,SOL_SOCKET,SO_KEEPALIVE,&optval,sizeof(optval)); 
 	
   /* bind to port  */
   address.sin_family = AF_INET;
@@ -294,7 +296,7 @@ static void tcpClientSpeedTest_thread(void *arg)
 	  	printf("\r\nconnect success");
 
   
-	buf = test;//(char *)malloc(sizeof(char) * 1024);
+	buf = test;// (char *)malloc(sizeof(char) * 1024);
 	if(buf ==NULL)
 		printf("\r\n buf null");
 	memset(buf, 't', 1024);

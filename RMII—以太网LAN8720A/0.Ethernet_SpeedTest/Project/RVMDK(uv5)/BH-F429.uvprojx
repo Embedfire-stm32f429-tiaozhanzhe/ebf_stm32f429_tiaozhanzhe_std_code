@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F429_439xx,USE_STDPERIPH_DRIVER,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\USER;..\..\uCOS_III\uC-CPU;..\..\uCOS_III\uC-LIB;..\..\uCOS_III\uCOS-III\Ports;..\..\uCOS_III\uCOS-III\Source;..\..\USER\os_cfg;..\..\lwip-1.4.1\port\UCOS305;..\..\lwip-1.4.1\port\arch;..\..\lwip-1.4.1\src\include\ipv4;..\..\lwip-1.4.1\src\include\lwip;..\..\lwip-1.4.1\src\include\netif;..\..\lwip-1.4.1\src\include;..\..\lwip-1.4.1\port;..\..\USER\Bsp\LAN8742A</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\USER;..\..\uCOS_III\uC-CPU;..\..\uCOS_III\uC-LIB;..\..\uCOS_III\uCOS-III\Ports;..\..\uCOS_III\uCOS-III\Source;..\..\USER\os_cfg;..\..\lwip-1.4.1\port\UCOS305;..\..\lwip-1.4.1\port\arch;..\..\lwip-1.4.1\src\include\ipv4;..\..\lwip-1.4.1\src\include\lwip;..\..\lwip-1.4.1\src\include\netif;..\..\lwip-1.4.1\src\include;..\..\lwip-1.4.1\port;..\..\USER\Bsp\LAN8742A;..\..\USER\Bsp</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,7 +394,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -403,7 +403,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>..\..\Socket.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -747,6 +747,11 @@
               <FileName>stm32f429_eth.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\USER\Bsp\LAN8742A\stm32f429_eth.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\USER\Bsp\sdram\bsp_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1200,8 +1205,8 @@
   <RTE>
     <apis/>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="4.2.0" condition="Cortex-M Device">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="4.4.0"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="4.1.0" condition="CMSIS Core">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="4.3.0"/>
         <targetInfos>
           <targetInfo name="Socket"/>
         </targetInfos>

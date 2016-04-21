@@ -17,6 +17,7 @@
 #include "includes.h"
 #include "lwipopts/netconf.h"
 #include "lwipopts/httpserver-socket.h"
+#include "./sdram/bsp_sdram.h"
 /*
 *********************************************************************************************************
 *                                            LOCAL DEFINES
@@ -149,6 +150,8 @@ static  void  AppTaskStart (void *p_arg)
 	APP_TRACE_DBG(("Creating Application Tasks\n\r"));
 #endif	
 	AppTaskCreate();                                            /* Create Application tasks                             */
+
+//	SDRAM_Test();
 
 	/* Initilaize the LwIP stack */
 	LwIP_Init();
