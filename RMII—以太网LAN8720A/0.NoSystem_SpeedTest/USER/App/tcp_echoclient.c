@@ -36,6 +36,7 @@
 #include "netconf.h"
 #include "LAN8742A.h"
 #include "tcp_echoclient.h"
+#include "./sdram/bsp_sdram.h"
 
 #if LWIP_TCP
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +47,7 @@
 u8_t  recev_buf[50];
 __IO uint32_t message_count=0;
 
-u8_t   data[1024];
+__align(4) u8_t   data[1024] __EXRAM;
 
 struct tcp_pcb *echoclient_pcb;
 
