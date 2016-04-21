@@ -204,7 +204,7 @@
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
             <AdsLLst>1</AdsLLst>
-            <AdsLmap>0</AdsLmap>
+            <AdsLmap>1</AdsLmap>
             <AdsLcgr>0</AdsLcgr>
             <AdsLsym>0</AdsLsym>
             <AdsLszi>1</AdsLszi>

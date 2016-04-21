@@ -38,7 +38,7 @@
 ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Stack_Size      EQU     0x00001000
+Stack_Size      EQU     0x00002000
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
 Stack_Mem       SPACE   Stack_Size
@@ -49,14 +49,12 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-;Heap_Size       EQU     0x00400000
-Heap_Size       EQU     0x400
-
+Heap_Size       EQU     0x00000800
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
-__heap_base		;EQU 	0xD0400000
+__heap_base
 Heap_Mem        SPACE   Heap_Size
-__heap_limit    ;EQU		0xD0800000
+__heap_limit
 
                 PRESERVE8
                 THUMB
@@ -189,14 +187,27 @@ Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
         IMPORT  SystemInit
         IMPORT  __main
-		IMPORT  SDRAM_Init
-
+			
+                 IF {FPU} != "SoftVFP"
+                                                ; Enable Floating Point Support at reset for FPU
+                 LDR.W   R0, =0xE000ED88         ; Load address of CPACR register
+                 LDR     R1, [R0]                ; Read value at CPACR
+                 ORR     R1,  R1, #(0xF <<20)    ; Set bits 20-23 to enable CP10 and CP11 coprocessors
+                                                ; Write back the modified CPACR value
+                 STR     R1, [R0]                ; Wait for store to complete
+                 DSB
+                
+                                                ; Disable automatic FP register content
+                                                ; Disable lazy context switch
+                 LDR.W   R0, =0xE000EF34         ; Load address to FPCCR register
+                 LDR     R1, [R0]
+                 AND     R1,  R1, #(0x3FFFFFFF)  ; Clear the LSPEN and ASPEN bits
+                 STR     R1, [R0]
+                 ISB                             ; Reset pipeline now the FPU is enabled
+                 ENDIF
+					 
                  LDR     R0, =SystemInit
                  BLX     R0
-				 
-				 LDR     R0, =SDRAM_Init
-                 BLX     R0
-				 
                  LDR     R0, =__main
                  BX      R0
                  ENDP
