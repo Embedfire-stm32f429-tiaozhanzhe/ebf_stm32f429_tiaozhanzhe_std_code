@@ -187,6 +187,7 @@ Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
         IMPORT  SystemInit
         IMPORT  __main
+		IMPORT  SDRAM_Init
 			
                  IF {FPU} != "SoftVFP"
                                                 ; Enable Floating Point Support at reset for FPU
@@ -208,6 +209,10 @@ Reset_Handler    PROC
 					 
                  LDR     R0, =SystemInit
                  BLX     R0
+				 
+				 LDR     R0, =SDRAM_Init
+                 BLX     R0
+				 
                  LDR     R0, =__main
                  BX      R0
                  ENDP
