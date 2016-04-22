@@ -253,8 +253,8 @@ static void http_server_socket_thread(void *arg)
 
 
 static char tcp_remote_ip[16] = "192.168.1.106"; /*remote ip address*/
-static int tcp_remote_port = 6000;               /*remote port*/
-char test[1024] ;//__EXRAM;
+static int tcp_remote_port = 5000;               /*remote port*/
+char test[1024] __EXRAM;
 /*-----------------------------------------------------------------------------------*/
 static void tcpClientSpeedTest_thread(void *arg)
 {

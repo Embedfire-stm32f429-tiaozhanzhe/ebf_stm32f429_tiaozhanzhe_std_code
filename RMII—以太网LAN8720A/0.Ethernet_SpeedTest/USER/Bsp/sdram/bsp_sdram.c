@@ -287,7 +287,7 @@ static void SDRAM_InitSequence(void)
  
  /* Step 7 --------------------------------------------------------------------*/
   /* …Ë÷√sdramºƒ¥Ê∆˜≈‰÷√ */
-  tmpr = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_8          |
+  tmpr = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_4          |
                    SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL   |
                    SDRAM_MODEREG_CAS_LATENCY_2           |
                    SDRAM_MODEREG_OPERATING_MODE_STANDARD |
