@@ -13,7 +13,7 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   }
   
    RW_ERAM1 0xD0000000 0x00800000 {  ; 外部SDRAM
-  ;*.o(HEAP)					;选择堆区
+  *.o(HEAP)					;选择堆区
    .ANY (EXRAM)				;选择EXRAM节区
 
   }

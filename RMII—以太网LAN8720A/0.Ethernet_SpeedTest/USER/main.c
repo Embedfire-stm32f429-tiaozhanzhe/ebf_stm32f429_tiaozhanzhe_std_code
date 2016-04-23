@@ -33,6 +33,27 @@ static  OS_TCB                        AppTaskObj0TCB;
 static  CPU_STK                       AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE];
 
 
+#if (OS_CFG_SEM_EN > 0u)
+static  OS_SEM       AppTraceSem;
+#endif
+
+#if (OS_CFG_SEM_EN > 0u)
+static  OS_SEM       AppTaskObjSem;
+#endif
+
+#if (OS_CFG_MUTEX_EN > 0u)
+static  OS_MUTEX     AppTaskObjMutex;
+#endif
+
+#if (OS_CFG_Q_EN > 0u)
+static  OS_Q         AppTaskObjQ;
+#endif
+
+#if (OS_CFG_FLAG_EN > 0u)
+static  OS_FLAG_GRP  AppTaskObjFlag;
+#endif
+
+
 #ifdef USE_DHCP
 #define APP_CFG_TASK_DHCP_PRIO        6
 #define APP_CFG_TASK_DHCP_STK_SIZE    512
@@ -176,12 +197,14 @@ static  void  AppTaskStart (void *p_arg)
 #endif  //#ifdef USE_DHCP
   //本地IP地址可在netconf.h文件修改
   printf("在电脑端浏览器直接输入地址：%d.%d.%d.%d，既可访问\n",IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
-	while (DEF_TRUE)
-	{ 
-		OSTimeDlyHMSM(0u, 0u, 1u, 0u,
-									OS_OPT_TIME_HMSM_STRICT,
-									&err);
-	}
+//	while (DEF_TRUE)
+//	{ 
+//		OSTimeDlyHMSM(0u, 0u, 1u, 0u,
+//									OS_OPT_TIME_HMSM_STRICT,
+//									&err);
+//	}
+
+	OSTaskDel(&AppTaskStartTCB,&err);
 }
 
 /*
@@ -199,6 +222,7 @@ static  void  AppTaskStart (void *p_arg)
 * Note(s)     : none.
 *********************************************************************************************************
 */
+#define APP_LED_TASK_PRIO  10
 
 static  void  AppTaskCreate (void)
 {
@@ -209,7 +233,7 @@ static  void  AppTaskCreate (void)
                  "Kernel Objects Task 0",
                   AppTaskObj0,
                   0,
-                  APP_CFG_TASK_OBJ_PRIO,
+                  APP_LED_TASK_PRIO,
                  &AppTaskObj0Stk[0],
                   AppTaskObj0Stk[APP_CFG_TASK_OBJ_STK_SIZE / 10u],
                   APP_CFG_TASK_OBJ_STK_SIZE,
@@ -219,6 +243,8 @@ static  void  AppTaskCreate (void)
                  (OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  &os_err);
 }
+
+
 
 
 /*
@@ -238,6 +264,41 @@ static  void  AppTaskCreate (void)
 */
 static  void  AppObjCreate (void)
 {
+	
+		OS_ERR  os_err;
+
+
+#if (OS_CFG_SEM_EN > 0u)
+    OSSemCreate(&AppTaskObjSem,
+                "Sem Test",
+                 0u,
+                &os_err);
+
+    OSSemCreate(&AppTraceSem,
+                "Trace Lock",
+                 1u,
+                &os_err);
+#endif
+
+#if (OS_CFG_MUTEX_EN > 0u)
+    OSMutexCreate(&AppTaskObjMutex,
+                  "Mutex Test",
+                  &os_err);
+#endif
+
+#if (OS_CFG_Q_EN > 0u)
+    OSQCreate(&AppTaskObjQ,
+              "Queue Test",
+               1,
+              &os_err);
+#endif
+
+#if (OS_CFG_FLAG_EN > 0u)
+    OSFlagCreate(&AppTaskObjFlag,
+                 "Flag Test",
+                  DEF_BIT_NONE,
+                 &os_err);
+#endif
   
 }
 /*

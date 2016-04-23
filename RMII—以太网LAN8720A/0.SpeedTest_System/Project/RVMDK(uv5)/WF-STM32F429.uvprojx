@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F429_439xx,USE_STDPERIPH_DRIVER,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\APP;..\..\User\BSP;..\..\User\BSP\led;..\..\User\uC-CPU;..\..\User\uC-CPU\ARM-Cortex-M4\RealView;..\..\User\uC-LIB;..\..\User\uCOS-III\Source;..\..\User\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\APP;..\..\User\BSP;..\..\User\BSP\led;..\..\User\uC-CPU;..\..\User\uC-CPU\ARM-Cortex-M4\RealView;..\..\User\uC-LIB;..\..\User\uCOS-III\Source;..\..\User\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;..\..\User\lwip-1.4.1\src\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,7 +394,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -403,7 +403,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\Output\WF-STM32F429.sct</ScatterFile>
+            <ScatterFile>.\WF-STM32F429.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -773,6 +773,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\BSP\led\bsp_led.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\BSP\sdram\bsp_sdram.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_debug_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\BSP\usart\bsp_debug_usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -987,6 +997,261 @@
               <FileName>os_cpu_c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView\os_cpu_c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lwip</GroupName>
+          <Files>
+            <File>
+              <FileName>def.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\def.c</FilePath>
+            </File>
+            <File>
+              <FileName>dhcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\dhcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>dns.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\dns.c</FilePath>
+            </File>
+            <File>
+              <FileName>init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>memp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\memp.c</FilePath>
+            </File>
+            <File>
+              <FileName>netif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\netif.c</FilePath>
+            </File>
+            <File>
+              <FileName>pbuf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\pbuf.c</FilePath>
+            </File>
+            <File>
+              <FileName>raw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\raw.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\stats.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\tcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp_in.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\tcp_in.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp_out.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\tcp_out.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\timers.c</FilePath>
+            </File>
+            <File>
+              <FileName>udp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\udp.c</FilePath>
+            </File>
+            <File>
+              <FileName>asn1_dec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\asn1_dec.c</FilePath>
+            </File>
+            <File>
+              <FileName>asn1_enc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\asn1_enc.c</FilePath>
+            </File>
+            <File>
+              <FileName>mib_structs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\mib_structs.c</FilePath>
+            </File>
+            <File>
+              <FileName>mib2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\mib2.c</FilePath>
+            </File>
+            <File>
+              <FileName>msg_in.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\msg_in.c</FilePath>
+            </File>
+            <File>
+              <FileName>msg_out.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\snmp\msg_out.c</FilePath>
+            </File>
+            <File>
+              <FileName>icmp6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv6\icmp6.c</FilePath>
+            </File>
+            <File>
+              <FileName>inet6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv6\inet6.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv6\ip6.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip6_addr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv6\ip6_addr.c</FilePath>
+            </File>
+            <File>
+              <FileName>autoip.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\autoip.c</FilePath>
+            </File>
+            <File>
+              <FileName>icmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\icmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>igmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\igmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>inet.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\inet.c</FilePath>
+            </File>
+            <File>
+              <FileName>inet_chksum.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\inet_chksum.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\ip.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip_addr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\ip_addr.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip_frag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\core\ipv4\ip_frag.c</FilePath>
+            </File>
+            <File>
+              <FileName>etharp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\etharp.c</FilePath>
+            </File>
+            <File>
+              <FileName>ethernetif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ethernetif.c</FilePath>
+            </File>
+            <File>
+              <FileName>slipif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\slipif.c</FilePath>
+            </File>
+            <File>
+              <FileName>auth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\auth.c</FilePath>
+            </File>
+            <File>
+              <FileName>chap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\chap.c</FilePath>
+            </File>
+            <File>
+              <FileName>chpms.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\chpms.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\fsm.c</FilePath>
+            </File>
+            <File>
+              <FileName>ipcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\ipcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\lcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>magic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\magic.c</FilePath>
+            </File>
+            <File>
+              <FileName>md5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\md5.c</FilePath>
+            </File>
+            <File>
+              <FileName>pap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\pap.c</FilePath>
+            </File>
+            <File>
+              <FileName>ppp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\ppp.c</FilePath>
+            </File>
+            <File>
+              <FileName>ppp_oe.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\ppp_oe.c</FilePath>
+            </File>
+            <File>
+              <FileName>randm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\randm.c</FilePath>
+            </File>
+            <File>
+              <FileName>vj.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lwip-1.4.1\src\netif\ppp\vj.c</FilePath>
             </File>
           </Files>
         </Group>
