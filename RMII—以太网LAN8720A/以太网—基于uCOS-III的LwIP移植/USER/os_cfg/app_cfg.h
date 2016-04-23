@@ -55,7 +55,7 @@
 */
 
 #define  APP_CFG_TASK_START_PRIO                2u
-#define  APP_CFG_TASK_OBJ_PRIO                  3u
+#define  APP_CFG_TASK_OBJ_PRIO                 OS_CFG_PRIO_MAX
 /*
 *********************************************************************************************************
 *                                            TASK STACK SIZES

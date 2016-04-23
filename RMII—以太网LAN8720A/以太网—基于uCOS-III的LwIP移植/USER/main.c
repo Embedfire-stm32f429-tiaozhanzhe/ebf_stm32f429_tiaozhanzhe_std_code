@@ -68,11 +68,14 @@ extern struct netif gnetif;
 
 int main(void)
 {
+
 	OS_ERR   err;
 #if (CPU_CFG_NAME_EN == DEF_ENABLED)
 	CPU_ERR  cpu_err;
 #endif                 
 
+	
+	
 	Mem_Init();                                                 /* Initialize Memory Managment Module                   */
 	Math_Init();                                                /* Initialize Mathematical Module                       */
 
@@ -154,6 +157,8 @@ static  void  AppTaskStart (void *p_arg)
 	/* Initilaize the LwIP stack */
 	LwIP_Init();
 	
+
+	
 #ifdef USE_DHCP
 	 /* Start DHCPClient */
 	 OSTaskCreate(&AppTaskDHCPTCB,"DHCP",
@@ -170,12 +175,18 @@ static  void  AppTaskStart (void *p_arg)
 							 &err);
 #endif  //#ifdef USE_DHCP
 
-	while (DEF_TRUE)
-	{                                          
-		OSTimeDlyHMSM(0u, 0u, 1u, 0u,
-									OS_OPT_TIME_HMSM_STRICT,
-									&err);
-  }
+  speedTest_init();
+//	netio_init();  //初始化netio服务器
+
+
+//	while (DEF_TRUE)
+//	{                                          
+//		OSTimeDlyHMSM(0u, 0u, 1u, 0u,
+//									OS_OPT_TIME_HMSM_STRICT,
+//									&err);
+//  }
+	OSTaskDel(&AppTaskStartTCB,&err);
+
 }
 
 /*

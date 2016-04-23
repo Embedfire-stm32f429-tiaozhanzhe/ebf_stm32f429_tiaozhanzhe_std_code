@@ -95,7 +95,11 @@
 #include "Bsp/led/bsp_led.h" 
 #include "Bsp/usart/bsp_debug_usart.h"
 #include "Bsp/key/bsp_key.h"
+#include "./sdram/bsp_sdram.h"
 #include "stm32f429_phy.h"
+#include "speedtest.h"
+#include "netio.h"
+
 /*
 *********************************************************************************************************
 *                                                 OS

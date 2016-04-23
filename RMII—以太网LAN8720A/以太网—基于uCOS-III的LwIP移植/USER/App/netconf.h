@@ -45,7 +45,7 @@
 #define DHCP_TIMEOUT               4
 #define DHCP_LINK_DOWN             5
 
-#define USE_DHCP       /* enable DHCP, if disabled static address is used */
+//#define USE_DHCP       /* enable DHCP, if disabled static address is used */
 
 /* 调试信息输出 */  
 #define SERIAL_DEBUG 

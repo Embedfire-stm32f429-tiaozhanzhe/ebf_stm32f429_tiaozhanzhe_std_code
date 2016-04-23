@@ -178,8 +178,9 @@ struct mem {
  * If so, make sure the memory at that location is big enough (see below on
  * how that space is calculated). */
 #ifndef LWIP_RAM_HEAP_POINTER
+#include "./sdram/bsp_sdram.h"
 /** the heap. we need one struct mem at the end and some room for alignment */
-u8_t ram_heap[MEM_SIZE_ALIGNED + (2*SIZEOF_STRUCT_MEM) + MEM_ALIGNMENT];
+u8_t ram_heap[MEM_SIZE_ALIGNED + (2*SIZEOF_STRUCT_MEM) + MEM_ALIGNMENT];// __EXRAM;
 #define LWIP_RAM_HEAP_POINTER ram_heap
 #endif /* LWIP_RAM_HEAP_POINTER */
 

@@ -10,12 +10,12 @@
       <TargetName>BH-F429</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
+      <pCCUsed>5050169::V5.05 update 2 (build 169)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429IGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.7.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.5.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000,0x100000) IRAM(0x20000000,0x30000) IRAM2(0x10000000,0x10000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -150,7 +150,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>6</TargetSelection>
+          <TargetSelection>12</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -164,7 +164,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>Segger\JL2CM3.dll</Driver>
+            <Driver>BIN\CMSIS_AGDI.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -223,7 +223,7 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>1</RvdsVP>
+            <RvdsVP>2</RvdsVP>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F429_439xx,USE_STDPERIPH_DRIVER,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\USER;..\..\uCOS_III\uC-CPU;..\..\uCOS_III\uC-LIB;..\..\uCOS_III\uCOS-III\Ports;..\..\uCOS_III\uCOS-III\Source;..\..\USER\os_cfg;..\..\USER\App;..\..\USER\Bsp\ETH;..\..\USER\lwip-1.4.1\port;..\..\USER\lwip-1.4.1\port\arch;..\..\USER\lwip-1.4.1\port\UCOS305;..\..\USER\lwip-1.4.1\src\include;..\..\USER\lwip-1.4.1\src\include\ipv4;..\..\USER\lwip-1.4.1\src\include\lwip;..\..\USER\lwip-1.4.1\src\netif</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\USER;..\..\uCOS_III\uC-CPU;..\..\uCOS_III\uC-LIB;..\..\uCOS_III\uCOS-III\Ports;..\..\uCOS_III\uCOS-III\Source;..\..\USER\os_cfg;..\..\USER\App;..\..\USER\Bsp\ETH;..\..\USER\lwip-1.4.1\port;..\..\USER\lwip-1.4.1\port\arch;..\..\USER\lwip-1.4.1\port\UCOS305;..\..\USER\lwip-1.4.1\src\include;..\..\USER\lwip-1.4.1\src\include\ipv4;..\..\USER\lwip-1.4.1\src\include\lwip;..\..\USER\lwip-1.4.1\src\netif;..\..\USER\Bsp</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,7 +394,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -403,7 +403,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\BH-F429.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -703,6 +703,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\USER\App\netconf.c</FilePath>
             </File>
+            <File>
+              <FileName>speedtest.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\USER\App\speedtest.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -742,6 +747,11 @@
               <FileName>cpu_bsp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\USER\Bsp\cpu_bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\USER\Bsp\sdram\bsp_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
