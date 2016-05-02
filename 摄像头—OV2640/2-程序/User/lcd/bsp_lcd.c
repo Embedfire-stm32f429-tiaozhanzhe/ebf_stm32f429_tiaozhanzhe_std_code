@@ -109,8 +109,8 @@ static void LCD_GPIO_Config(void);
 #define HSW   1
 #define VSW   1
 
-#define HFP  16
-#define VFP   7
+#define HFP  22
+#define VFP   22
 
 void LCD_Init(void)
 { 

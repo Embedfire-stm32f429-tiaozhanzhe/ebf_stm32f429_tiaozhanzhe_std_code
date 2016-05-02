@@ -10,7 +10,7 @@
 #include "./font/fonts.h"
 
 /*把这个宏设置成非0值 液晶屏使用RGB888色彩，若为0则使用RGB565色彩*/
-#define LCD_RGB_888  1
+#define LCD_RGB_888  0
 
 
 

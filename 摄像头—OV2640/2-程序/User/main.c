@@ -34,7 +34,7 @@ uint8_t fps=0;
 
 //显示帧率数据，默认不显示，需要显示时把这个宏设置为1即可，（会有轻微花屏现象！）
 //经测试液晶显示摄像头数据800*480像素，帧率为14.2帧/秒。
-#define FRAME_RATE_DISPLAY 	1
+//#define FRAME_RATE_DISPLAY 	1
 
 
 

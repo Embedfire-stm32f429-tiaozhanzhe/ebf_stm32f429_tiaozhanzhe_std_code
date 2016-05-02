@@ -107,8 +107,8 @@ static void LCD_GPIO_Config(void);
 #define HSW   1
 #define VSW   1
 
-#define HFP  16
-#define VFP   7
+#define HFP  22
+#define VFP   22
 
 void LCD_Init(void)
 { 
@@ -2224,9 +2224,9 @@ void LCD_Clear(uint16_t Color)
 
  uint16_t Red_Value = 0, Green_Value = 0, Blue_Value = 0;
 
- Red_Value = (0xF800 & CurrentTextColor) >> 11;
- Blue_Value = 0x001F & CurrentTextColor;
- Green_Value = (0x07E0 & CurrentTextColor) >> 5;
+ Red_Value = (0xF800 & Color) >> 11;
+ Blue_Value = 0x001F & Color;
+ Green_Value = (0x07E0 & Color) >> 5;
 
 
  /* configure DMA2D */
