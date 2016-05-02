@@ -106,8 +106,8 @@ static void LCD_GPIO_Config(void);
 #define HBP  46		//HSYNC后的无效像素
 #define VBP  23		//VSYNC后的无效行数
 
-#define HSW   20		//HSYNC宽度
-#define VSW   10		//VSYNC宽度
+#define HSW   1		//HSYNC宽度
+#define VSW   1		//VSYNC宽度
 
 #define HFP  20		//HSYNC前的无效像素
 #define VFP   22		//VSYNC前的无效行数
