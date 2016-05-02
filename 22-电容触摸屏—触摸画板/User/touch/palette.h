@@ -114,7 +114,7 @@ typedef enum
 /*»­Ë¢²ÎÊý*/
 typedef struct
 {
-  uint16_t color;
+  uint32_t color;
   
   SHAPE  shape;
   

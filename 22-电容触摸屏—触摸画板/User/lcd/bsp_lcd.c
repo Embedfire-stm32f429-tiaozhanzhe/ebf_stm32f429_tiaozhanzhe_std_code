@@ -108,8 +108,8 @@ static void LCD_GPIO_Config(void);
 #define HSW   1		//HSYNC宽度
 #define VSW   1		//VSYNC宽度
 
-#define HFP  350		//HSYNC前的无效像素
-#define VFP   140		//VSYNC前的无效行数
+#define HFP  22		//HSYNC前的无效像素
+#define VFP   22		//VSYNC前的无效行数
 
 
 /**
@@ -137,7 +137,7 @@ void LCD_Init(void)
 	
 	/* 配置 PLLSAI 分频器，它的输出作为像素同步时钟CLK*/
   /* PLLSAI_VCO 输入时钟 = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO 输出时钟 = PLLSAI_VCO输入 * PLLSAI_N = 416 Mhz */
+  /* PLLSAI_VCO 输出时钟 = PLLSAI_VCO输入 * PLLSAI_N = 420 Mhz */
   /* PLLLCDCLK = PLLSAI_VCO 输出/PLLSAI_R = 420/6  Mhz */
   /* LTDC 时钟频率 = PLLLCDCLK / DIV = 420/6/8 = 8.75 Mhz */
 	/* LTDC时钟太高会导花屏，若对刷屏速度要求不高，降低时钟频率可减少花屏现象*/
@@ -1924,14 +1924,17 @@ static void LCD_GPIO_Config(void);
  * @retval None
  */
 
-#define HBP  24
-#define VBP   3
+/*根据液晶数据手册的参数配置*/
+#define HBP  46		//HSYNC后的无效像素
+#define VBP  23		//VSYNC后的无效行数
 
-#define HSW   6
-#define VSW   1
+#define HSW   1		//HSYNC宽度
+#define VSW   1		//VSYNC宽度
 
-#define HFP  10
-#define VFP   4
+#define HFP  22		//HSYNC前的无效像素
+#define VFP   22		//VSYNC前的无效行数
+
+
 
 void LCD_Init(void)
 {
@@ -1965,14 +1968,16 @@ void LCD_Init(void)
  LTDC_InitStruct.LTDC_BackgroundGreenValue = 0;
  LTDC_InitStruct.LTDC_BackgroundBlueValue = 0;
 
- /* Configure PLLSAI prescalers for LCD */
- /* Enable Pixel Clock */
- /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
- /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAI_N = 192 Mhz */
- /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAI_R = 192/4 = 48 Mhz */
- /* LTDC clock frequency = PLLLCDCLK / RCC_PLLSAIDivR = 48/8 = 6 Mhz */
- RCC_PLLSAIConfig(384, 7, 4);
- RCC_LTDCCLKDivConfig(RCC_PLLSAIDivR_Div4);
+	/* 配置 PLLSAI 分频器，它的输出作为像素同步时钟CLK*/
+  /* PLLSAI_VCO 输入时钟 = HSE_VALUE/PLL_M = 1 Mhz */
+  /* PLLSAI_VCO 输出时钟 = PLLSAI_VCO输入 * PLLSAI_N = 250 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO 输出/PLLSAI_R = 250/5  Mhz */
+  /* LTDC 时钟频率 = PLLLCDCLK / DIV = 250/5/2 = 25 Mhz */
+	/* LTDC时钟太高会导花屏，若对刷屏速度要求不高，降低时钟频率可减少花屏现象*/
+	/* 以下函数三个参数分别为：PLLSAIN,PLLSAIQ,PLLSAIR，其中PLLSAIQ与LTDC无关*/
+ RCC_PLLSAIConfig(250, 7, 5);
+ 	/*以下函数的参数为DIV值*/
+ RCC_LTDCCLKDivConfig(RCC_PLLSAIDivR_Div2);
 
  /* Enable PLLSAI Clock */
  RCC_PLLSAICmd(ENABLE);
@@ -1981,23 +1986,23 @@ void LCD_Init(void)
  {
  }
 
- /* Timing configuration */
- /* Configure horizontal synchronization width */
- LTDC_InitStruct.LTDC_HorizontalSync =HSW;
- /* Configure vertical synchronization height */
- LTDC_InitStruct.LTDC_VerticalSync = VSW;
- /* Configure accumulated horizontal back porch */
- LTDC_InitStruct.LTDC_AccumulatedHBP =HBP;
- /* Configure accumulated vertical back porch */
- LTDC_InitStruct.LTDC_AccumulatedVBP = VBP;
- /* Configure accumulated active width */
- LTDC_InitStruct.LTDC_AccumulatedActiveW = LCD_PIXEL_WIDTH+HBP;
- /* Configure accumulated active height */
- LTDC_InitStruct.LTDC_AccumulatedActiveH = LCD_PIXEL_HEIGHT+VBP;
- /* Configure total width */
- LTDC_InitStruct.LTDC_TotalWidth =LCD_PIXEL_WIDTH + HBP + HFP; 
- /* Configure total height */
- LTDC_InitStruct.LTDC_TotalHeigh =LCD_PIXEL_HEIGHT + VBP + VFP;
+  /* 时间参数配置 */  
+ /* 配置行同步信号宽度(HSW-1) */
+ LTDC_InitStruct.LTDC_HorizontalSync =HSW-1;
+ /* 配置垂直同步信号宽度(VSW-1) */
+ LTDC_InitStruct.LTDC_VerticalSync = VSW-1;
+ /* 配置(HSW+HBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedHBP =HSW+HBP-1;
+ /* 配置(VSW+VBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedVBP = VSW+VBP-1;
+ /* 配置(HSW+HBP+有效像素宽度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveW = HSW+HBP+LCD_PIXEL_WIDTH-1;
+ /* 配置(VSW+VBP+有效像素高度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveH = VSW+VBP+LCD_PIXEL_HEIGHT-1;
+ /* 配置总宽度(HSW+HBP+有效像素宽度+HFP-1) */
+ LTDC_InitStruct.LTDC_TotalWidth =HSW+ HBP+LCD_PIXEL_WIDTH  + HFP-1; 
+ /* 配置总高度(VSW+VBP+有效像素高度+VFP-1) */
+ LTDC_InitStruct.LTDC_TotalHeigh =VSW+ VBP+LCD_PIXEL_HEIGHT  + VFP-1;
 
  LTDC_Init(&LTDC_InitStruct);
 }
@@ -2023,7 +2028,7 @@ void LCD_LayerInit(void)
  LTDC_Layer_InitStruct.LTDC_VerticalStop = (LCD_PIXEL_HEIGHT + VBP);
 
  /* Pixel Format configuration*/
- LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_ARGB1555;
+ LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_RGB565;
  /* Alpha constant (255 totally opaque) */
  LTDC_Layer_InitStruct.LTDC_ConstantAlpha = 255;
  /* Default Color configuration (configure A,R,G,B component values) */
@@ -2057,7 +2062,7 @@ void LCD_LayerInit(void)
 
   /* Configure Layer2 */
  /* Pixel Format configuration*/
- LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_ARGB1555;
+ LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_RGB565;
  
   /* Start Address configuration : the LCD Frame buffer is defined on SDRAM w/ Offset */
  LTDC_Layer_InitStruct.LTDC_CFBStartAdress = LCD_FRAME_BUFFER + BUFFER_OFFSET;
@@ -2085,6 +2090,7 @@ void LCD_LayerInit(void)
   /* dithering activation */
  LTDC_DitherCmd(ENABLE);
 }
+
 
 
 
@@ -2227,9 +2233,9 @@ void LCD_Clear(uint16_t Color)
 
  uint16_t Red_Value = 0, Green_Value = 0, Blue_Value = 0;
 
- Red_Value = (0xF800 & CurrentTextColor) >> 11;
- Blue_Value = 0x001F & CurrentTextColor;
- Green_Value = (0x07E0 & CurrentTextColor) >> 5;
+ Red_Value = (0xF800 & Color) >> 11;
+ Blue_Value = 0x001F & Color;
+ Green_Value = (0x07E0 & Color) >> 5;
 
 
  /* configure DMA2D */
@@ -2239,7 +2245,7 @@ void LCD_Clear(uint16_t Color)
  DMA2D_InitStruct.DMA2D_OutputGreen = Green_Value;
  DMA2D_InitStruct.DMA2D_OutputBlue = Blue_Value;
  DMA2D_InitStruct.DMA2D_OutputRed = Red_Value;
- DMA2D_InitStruct.DMA2D_OutputAlpha = (Color&0x8000) ? 0xFF:0x00;		//设置透明度
+ DMA2D_InitStruct.DMA2D_OutputAlpha = 0x0F;
  DMA2D_InitStruct.DMA2D_OutputMemoryAdd = CurrentFrameBuffer;
  DMA2D_InitStruct.DMA2D_OutputOffset = 0;
  DMA2D_InitStruct.DMA2D_NumberOfLine = LCD_PIXEL_HEIGHT;

@@ -720,7 +720,7 @@ static void Command_Select_Color(void *btn)
   Touch_Button *ptr = (Touch_Button *)btn;
   
   brush.color = ptr->para;	
-	LCD_SetColors(ptr->para,CL_WHITE);
+	LCD_SetColors(brush.color,CL_WHITE);
   
   if(brush.shape == RUBBER)
   {
@@ -738,7 +738,7 @@ static void Command_Select_Brush(void *btn)
 {
   Touch_Button *ptr = (Touch_Button *)btn;
   brush.shape =(SHAPE) ptr->para;
-
+	LCD_SetColors(brush.color,CL_WHITE);
 }
 
 /**
