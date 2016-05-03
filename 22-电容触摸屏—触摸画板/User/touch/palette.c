@@ -64,6 +64,9 @@ void Palette_Init(void)
   /* ≥ı ºªØª≠±  */
   brush.color = CL_BLACK;
   brush.shape = LINE_SINGLE_PIXCEL;
+	
+	LCD_SetTextColor(brush.color);
+
 
 }
 
