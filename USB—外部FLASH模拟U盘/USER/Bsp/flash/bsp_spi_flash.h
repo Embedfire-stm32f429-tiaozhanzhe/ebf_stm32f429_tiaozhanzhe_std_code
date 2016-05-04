@@ -45,62 +45,67 @@
 #define Dummy_Byte                          0xFF
 
 
-
 #ifdef USB_FLASH_SPI3
 /*SPI接口*/
-#define FLASH_SPI                           SPI3
-#define FLASH_SPI_CLK                       RCC_APB1Periph_SPI3
-#define FLASH_SPI_CLK_INIT                  RCC_APB1PeriphClockCmd
+#define FLASH_SPI                           SPI5
+#define FLASH_SPI_CLK                       RCC_APB2Periph_SPI5
+#define FLASH_SPI_CLK_INIT                  RCC_APB2PeriphClockCmd
 
-#define FLASH_SPI_SCK_PIN                   GPIO_Pin_3                  
-#define FLASH_SPI_SCK_GPIO_PORT             GPIOB                       
-#define FLASH_SPI_SCK_GPIO_CLK              RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_SCK_PINSOURCE             GPIO_PinSource3
-#define FLASH_SPI_SCK_AF                    GPIO_AF_SPI3
+#define FLASH_SPI_SCK_PIN                   GPIO_Pin_7                  
+#define FLASH_SPI_SCK_GPIO_PORT             GPIOF                       
+#define FLASH_SPI_SCK_GPIO_CLK              RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_SCK_PINSOURCE             GPIO_PinSource7
+#define FLASH_SPI_SCK_AF                    GPIO_AF_SPI5
 
-#define FLASH_SPI_MISO_PIN                  GPIO_Pin_4                
-#define FLASH_SPI_MISO_GPIO_PORT            GPIOB                   
-#define FLASH_SPI_MISO_GPIO_CLK             RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_MISO_PINSOURCE            GPIO_PinSource4
-#define FLASH_SPI_MISO_AF                   GPIO_AF_SPI3
+#define FLASH_SPI_MISO_PIN                  GPIO_Pin_8                
+#define FLASH_SPI_MISO_GPIO_PORT            GPIOF                   
+#define FLASH_SPI_MISO_GPIO_CLK             RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_MISO_PINSOURCE            GPIO_PinSource8
+#define FLASH_SPI_MISO_AF                   GPIO_AF_SPI5
 
-#define FLASH_SPI_MOSI_PIN                  GPIO_Pin_5                
-#define FLASH_SPI_MOSI_GPIO_PORT            GPIOB                      
-#define FLASH_SPI_MOSI_GPIO_CLK             RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_MOSI_PINSOURCE            GPIO_PinSource5
-#define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI3
+#define FLASH_SPI_MOSI_PIN                  GPIO_Pin_9                
+#define FLASH_SPI_MOSI_GPIO_PORT            GPIOF                    
+#define FLASH_SPI_MOSI_GPIO_CLK             RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_MOSI_PINSOURCE            GPIO_PinSource9
+#define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI5
 
 #endif  //end #ifdef USB_FLASH_SPI3 
 
 #ifdef  USB_FLASH_SPI1
 /*SPI接口*/
-#define FLASH_SPI                           SPI1
-#define FLASH_SPI_CLK                       RCC_APB2Periph_SPI1
+#define FLASH_SPI                           SPI5
+#define FLASH_SPI_CLK                       RCC_APB2Periph_SPI5
 #define FLASH_SPI_CLK_INIT                  RCC_APB2PeriphClockCmd
 
-#define FLASH_SPI_SCK_PIN                   GPIO_Pin_3                 
-#define FLASH_SPI_SCK_GPIO_PORT             GPIOB                       
-#define FLASH_SPI_SCK_GPIO_CLK              RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_SCK_PINSOURCE             GPIO_PinSource3
-#define FLASH_SPI_SCK_AF                    GPIO_AF_SPI1
+#define FLASH_SPI_SCK_PIN                   GPIO_Pin_7                  
+#define FLASH_SPI_SCK_GPIO_PORT             GPIOF                       
+#define FLASH_SPI_SCK_GPIO_CLK              RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_SCK_PINSOURCE             GPIO_PinSource7
+#define FLASH_SPI_SCK_AF                    GPIO_AF_SPI5
 
-#define FLASH_SPI_MISO_PIN                  GPIO_Pin_4                 
-#define FLASH_SPI_MISO_GPIO_PORT            GPIOB                     
-#define FLASH_SPI_MISO_GPIO_CLK             RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_MISO_PINSOURCE            GPIO_PinSource4
-#define FLASH_SPI_MISO_AF                   GPIO_AF_SPI1
+#define FLASH_SPI_MISO_PIN                  GPIO_Pin_8                
+#define FLASH_SPI_MISO_GPIO_PORT            GPIOF                   
+#define FLASH_SPI_MISO_GPIO_CLK             RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_MISO_PINSOURCE            GPIO_PinSource8
+#define FLASH_SPI_MISO_AF                   GPIO_AF_SPI5
 
-#define FLASH_SPI_MOSI_PIN                  GPIO_Pin_5                 
-#define FLASH_SPI_MOSI_GPIO_PORT            GPIOB                     
-#define FLASH_SPI_MOSI_GPIO_CLK             RCC_AHB1Periph_GPIOB
-#define FLASH_SPI_MOSI_PINSOURCE            GPIO_PinSource5
-#define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI1
+#define FLASH_SPI_MOSI_PIN                  GPIO_Pin_9                
+#define FLASH_SPI_MOSI_GPIO_PORT            GPIOF                    
+#define FLASH_SPI_MOSI_GPIO_CLK             RCC_AHB1Periph_GPIOF
+#define FLASH_SPI_MOSI_PINSOURCE            GPIO_PinSource9
+#define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI5
+
 
 #endif  //end #ifdef USB_FLASH_SPI1 
 
-#define FLASH_CS_PIN                        GPIO_Pin_8                 
-#define FLASH_CS_GPIO_PORT                  GPIOI                      
-#define FLASH_CS_GPIO_CLK                   RCC_AHB1Periph_GPIOI
+#define FLASH_CS_PIN                        GPIO_Pin_6                 
+#define FLASH_CS_GPIO_PORT                  GPIOF                      
+#define FLASH_CS_GPIO_CLK                   RCC_AHB1Periph_GPIOF
+
+
+#define SPI_FLASH_CS_LOW()      {FLASH_CS_GPIO_PORT->BSRRH=FLASH_CS_PIN;}				//输出低电平 GPIO_ResetBits(FLASH_CS_GPIO_PORT, FLASH_CS_PIN)
+#define SPI_FLASH_CS_HIGH()     {FLASH_CS_GPIO_PORT->BSRRL=FLASH_CS_PIN;}			  //设置为高电平 GPIO_SetBits(FLASH_CS_GPIO_PORT, FLASH_CS_PIN)
+
 
 #define SPI_FLASH_CS_LOW()                  {FLASH_CS_GPIO_PORT->BSRRH=FLASH_CS_PIN;}				//输出低电平 GPIO_ResetBits(FLASH_CS_GPIO_PORT, FLASH_CS_PIN)
 #define SPI_FLASH_CS_HIGH()                 {FLASH_CS_GPIO_PORT->BSRRL=FLASH_CS_PIN;}			  //设置为高电平 GPIO_SetBits(FLASH_CS_GPIO_PORT, FLASH_CS_PIN)
