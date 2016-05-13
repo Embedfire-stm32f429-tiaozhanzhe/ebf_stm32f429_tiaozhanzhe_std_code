@@ -3,17 +3,26 @@
 
 #include "stm32f4xx.h"
 #include "./lcd/bsp_lcd.h"
+ 
 
 #define COLOR_BLOCK_WIDTH   90
 #define COLOR_BLOCK_HEIGHT  50
 
 #define BUTTON_NUM 18
-
-#define PALETTE_START_X   COLOR_BLOCK_WIDTH*2+1
 #define PALETTE_START_Y   0
-#define PALETTE_END_X     LCD_PIXEL_WIDTH
 #define PALETTE_END_Y     LCD_PIXEL_HEIGHT
 
+#if 1     //按钮栏在左边
+  #define BUTTON_START_X      0
+  #define PALETTE_START_X   COLOR_BLOCK_WIDTH*2+1
+  #define PALETTE_END_X     LCD_PIXEL_WIDTH
+
+#else     //按钮栏在右边，(存在触摸按键时也会的bug仅用于测试触摸屏左边界)
+  #define BUTTON_START_X      LCD_PIXEL_WIDTH-2*COLOR_BLOCK_WIDTH
+  #define PALETTE_START_X   0
+  #define PALETTE_END_X     LCD_PIXEL_WIDTH-2*COLOR_BLOCK_WIDTH
+
+#endif
 
 
 

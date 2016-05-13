@@ -81,81 +81,81 @@ void Palette_Init(void)
 void Touch_Button_Init(void)
 {
   /*第一列，主要为颜色按钮*/
-  button[0].start_x = 0;
+  button[0].start_x = BUTTON_START_X;
   button[0].start_y = 0;
-  button[0].end_x = COLOR_BLOCK_WIDTH ;
+  button[0].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[0].end_y = COLOR_BLOCK_HEIGHT;
   button[0].para = CL_BLACK;
   button[0].touch_flag = 0;  
   button[0].draw_btn = Draw_Color_Button ;
   button[0].btn_command = Command_Select_Color ;
   
-  button[1].start_x = 0;
+  button[1].start_x = BUTTON_START_X;
   button[1].start_y = COLOR_BLOCK_HEIGHT;
-  button[1].end_x = COLOR_BLOCK_WIDTH ;
+  button[1].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[1].end_y = COLOR_BLOCK_HEIGHT*2;
   button[1].para = CL_GREY;
   button[1].touch_flag = 0;  
   button[1].draw_btn = Draw_Color_Button ;
   button[1].btn_command = Command_Select_Color ;
   
-  button[2].start_x = 0;
+  button[2].start_x = BUTTON_START_X;
   button[2].start_y = COLOR_BLOCK_HEIGHT*2;
-  button[2].end_x = COLOR_BLOCK_WIDTH ;
+  button[2].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[2].end_y = COLOR_BLOCK_HEIGHT*3;
   button[2].para = CL_BLUE;
   button[2].touch_flag = 0;  
   button[2].draw_btn = Draw_Color_Button ;
   button[2].btn_command = Command_Select_Color ;
   
-  button[3].start_x = 0;
+  button[3].start_x = BUTTON_START_X;
   button[3].start_y = COLOR_BLOCK_HEIGHT*3;
-  button[3].end_x = COLOR_BLOCK_WIDTH ;
+  button[3].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[3].end_y = COLOR_BLOCK_HEIGHT*4;
   button[3].para = CL_BLUE2;
   button[3].touch_flag = 0;  
   button[3].draw_btn = Draw_Color_Button ;
   button[3].btn_command = Command_Select_Color ;
   
-  button[4].start_x = 0;
+  button[4].start_x = BUTTON_START_X;
   button[4].start_y = COLOR_BLOCK_HEIGHT*4;
-  button[4].end_x = COLOR_BLOCK_WIDTH ;
+  button[4].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[4].end_y = COLOR_BLOCK_HEIGHT*5;
   button[4].para = CL_RED;
   button[4].touch_flag = 0;  
   button[4].draw_btn = Draw_Color_Button ;
   button[4].btn_command = Command_Select_Color ;
   
-  button[5].start_x = 0;
+  button[5].start_x = BUTTON_START_X;
   button[5].start_y = COLOR_BLOCK_HEIGHT*5;
-  button[5].end_x = COLOR_BLOCK_WIDTH ;
+  button[5].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[5].end_y = COLOR_BLOCK_HEIGHT*6;
   button[5].para = CL_MAGENTA;
   button[5].touch_flag = 0;  
   button[5].draw_btn = Draw_Color_Button ;
   button[5].btn_command = Command_Select_Color ;
   
-  button[6].start_x = 0;
+  button[6].start_x = BUTTON_START_X;
   button[6].start_y = COLOR_BLOCK_HEIGHT*6;
-  button[6].end_x = COLOR_BLOCK_WIDTH ;
+  button[6].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[6].end_y = COLOR_BLOCK_HEIGHT*7;
   button[6].para = CL_GREEN;
   button[6].touch_flag = 0;  
   button[6].draw_btn = Draw_Color_Button ;
   button[6].btn_command = Command_Select_Color ;
   
-  button[7].start_x = 0;
+  button[7].start_x = BUTTON_START_X;
   button[7].start_y = COLOR_BLOCK_HEIGHT*7;
-  button[7].end_x = COLOR_BLOCK_WIDTH ;
+  button[7].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[7].end_y = COLOR_BLOCK_HEIGHT*8;
   button[7].para = CL_CYAN;
   button[7].touch_flag = 0;  
   button[7].draw_btn = Draw_Color_Button ;
   button[7].btn_command = Command_Select_Color ;
   
-  button[8].start_x = 0;
+  button[8].start_x = BUTTON_START_X;
   button[8].start_y = COLOR_BLOCK_HEIGHT*8;
-  button[8].end_x = COLOR_BLOCK_WIDTH ;
+  button[8].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH ;
   button[8].end_y = LCD_PIXEL_HEIGHT;
   button[8].para = CL_BUTTON_GREY;
   button[8].touch_flag = 0;  
@@ -165,81 +165,81 @@ void Touch_Button_Init(void)
   
   
   /*第二列，主要为画刷按钮*/
-  button[9].start_x = COLOR_BLOCK_WIDTH;
+  button[9].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[9].start_y = 0;
-  button[9].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[9].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[9].end_y = COLOR_BLOCK_HEIGHT;
   button[9].para = LINE_SINGLE_PIXCEL;
   button[9].touch_flag = 0;  
   button[9].draw_btn = Draw_Shape_Button ;
   button[9].btn_command = Command_Select_Brush ;
   
-  button[10].start_x = COLOR_BLOCK_WIDTH;
+  button[10].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[10].start_y = COLOR_BLOCK_HEIGHT;
-  button[10].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[10].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[10].end_y = COLOR_BLOCK_HEIGHT*2;
   button[10].para = LINE_2_PIXCEL;
   button[10].touch_flag = 0;  
   button[10].draw_btn = Draw_Shape_Button ;
   button[10].btn_command = Command_Select_Brush ;
   
-  button[11].start_x = COLOR_BLOCK_WIDTH;
+  button[11].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[11].start_y = COLOR_BLOCK_HEIGHT*2;
-  button[11].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[11].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[11].end_y = COLOR_BLOCK_HEIGHT*3;
   button[11].para = LINE_4_PIXCEL;
   button[11].touch_flag = 0;  
   button[11].draw_btn = Draw_Shape_Button ;
   button[11].btn_command = Command_Select_Brush ;
   
-  button[12].start_x = COLOR_BLOCK_WIDTH;
+  button[12].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[12].start_y = COLOR_BLOCK_HEIGHT*3;
-  button[12].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[12].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[12].end_y = COLOR_BLOCK_HEIGHT*4;
   button[12].para = LINE_6_PIXCEL;
   button[12].touch_flag = 0;  
   button[12].draw_btn = Draw_Shape_Button ;
   button[12].btn_command = Command_Select_Brush ;
   
-  button[13].start_x = COLOR_BLOCK_WIDTH;
+  button[13].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[13].start_y = COLOR_BLOCK_HEIGHT*4;
-  button[13].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[13].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[13].end_y = COLOR_BLOCK_HEIGHT*5;
   button[13].para = LINE_8_PIXCEL;
   button[13].touch_flag = 0;  
   button[13].draw_btn = Draw_Shape_Button ;
   button[13].btn_command = Command_Select_Brush ;
   
-  button[14].start_x = COLOR_BLOCK_WIDTH;
+  button[14].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[14].start_y = COLOR_BLOCK_HEIGHT*5;
-  button[14].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[14].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[14].end_y = COLOR_BLOCK_HEIGHT*6;
   button[14].para = LINE_16_PIXCEL;
   button[14].touch_flag = 0;  
   button[14].draw_btn = Draw_Shape_Button ;
   button[14].btn_command = Command_Select_Brush ;
   
-  button[15].start_x = COLOR_BLOCK_WIDTH;
+  button[15].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[15].start_y = COLOR_BLOCK_HEIGHT*6;
-  button[15].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[15].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[15].end_y = COLOR_BLOCK_HEIGHT*7;
   button[15].para = LINE_20_PIXCEL;
   button[15].touch_flag = 0;  
   button[15].draw_btn = Draw_Shape_Button ;
   button[15].btn_command = Command_Select_Brush ;   
   
-  button[16].start_x = COLOR_BLOCK_WIDTH;
+  button[16].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[16].start_y = COLOR_BLOCK_HEIGHT*7;
-  button[16].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[16].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[16].end_y = COLOR_BLOCK_HEIGHT*8;
   button[16].para = LINE_WITH_CIRCLE;
   button[16].touch_flag = 0;  
   button[16].draw_btn = Draw_Shape_Button ;
   button[16].btn_command = Command_Select_Brush ;
   
-  button[17].start_x = COLOR_BLOCK_WIDTH;
+  button[17].start_x = BUTTON_START_X + COLOR_BLOCK_WIDTH;
   button[17].start_y = COLOR_BLOCK_HEIGHT*8;
-  button[17].end_x = COLOR_BLOCK_WIDTH*2 ;
+  button[17].end_x = BUTTON_START_X+COLOR_BLOCK_WIDTH*2 ;
   button[17].end_y = LCD_PIXEL_HEIGHT;
   button[17].para = RUBBER;
   button[17].touch_flag = 0;  
