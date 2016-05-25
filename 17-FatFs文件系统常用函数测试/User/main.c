@@ -60,11 +60,11 @@ static FRESULT miscellaneous(void)
   
   printf("\n******** 文件定位和格式化写入功能测试 ********\r\n");
   res_flash = f_open(&fnew, "1:FatFs读写测试文件.txt",
-                            FA_OPEN_EXISTING|FA_WRITE|FA_READ );
+                            FA_OPEN_ALWAYS|FA_WRITE|FA_READ );
 	if ( res_flash == FR_OK )
 	{
     /*  文件定位 */
-    res_flash = f_lseek(&fnew,f_size(&fnew)-1);
+    res_flash = f_lseek(&fnew,f_size(&fnew));
     if (res_flash == FR_OK)
     {
       /* 格式化写入，参数格式类似printf函数 */
