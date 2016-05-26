@@ -2,6 +2,13 @@
 #define	__AUX_DATA_H
 
 #include "stm32f4xx.h"
+#include "ff.h"
+#include "string.h"
+
+
+//SD卡及flash的根目录
+#define SD_ROOT       "0:"
+#define FLASH_ROOT    "1:"
 
 typedef enum 
 {
@@ -39,7 +46,7 @@ extern  Aux_Data_Typedef  burn_data[AUX_MAX_NUM];
 
 
 /*信息输出*/
-#define BURN_DEBUG_ON         1
+#define BURN_DEBUG_ON         0
 #define BURN_DEBUG_FUNC_ON    0
 
 #define BURN_INFO(fmt,arg...)           printf("<<-BURN-INFO->> "fmt"\n",##arg)
@@ -54,7 +61,44 @@ extern  Aux_Data_Typedef  burn_data[AUX_MAX_NUM];
                                          printf("<<-BURN-FUNC->> Func:%s@Line:%d\n",__func__,__LINE__);\
                                        }while(0)
 
-int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num);
 
+#define debug_print_assert(A,B,C,D,E,F) do {if (BURN_DEBUG_ON)\
+                                                     printf("\r\nerror code = %d,[occur:%s:%s:%4d] **ASSERT** %s""\r\n",A, D, F, E, (C!=NULL) ? C : "" );\
+                                                     }while(0==1)
+   
+                                       
+                                       
+ // ==== LOGGING ====
+#define SHORT_FILE strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__
+ 
+// ==== BRANCH PREDICTION & EXPRESSION EVALUATION ====
+#if( !defined( unlikely ) )
+    //#define unlikely( EXPRESSSION )     __builtin_expect( !!(EXPRESSSION), 0 )
+   #define unlikely( EXPRESSSION )     !!(EXPRESSSION)
+#endif
+  
+
+//用于检查参数，err非0就跳转到LABEL处                                                     
+#if( !defined( check ) )                                       
+#define require_noerr( ERR, LABEL )                                                                     \
+    do                                                                                                  \
+    {                                                                                                   \
+        FRESULT        localErr;                                                                       \
+                                                                                                        \
+        localErr = (FRESULT)(ERR);                                                                     \
+        if( unlikely( localErr != 0 ) )                                                                 \
+        {                                                                                               \
+            debug_print_assert( localErr, NULL, NULL, SHORT_FILE, __LINE__, __PRETTY_FUNCTION__ );        \
+            goto LABEL;                                                                                 \
+        }                                                                                               \
+                                                                                                        \
+    }   while( 1==0 )                                       
+#endif                                      
+                                       
+                                       
+                                       
+
+int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num);
+int copy_file_sd2flash(char *src_path,char *dst_path); 
 
 #endif /* __BURN_DATA_H */

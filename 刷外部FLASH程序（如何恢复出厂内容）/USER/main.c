@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2015-xx-xx
-  * @brief   用1.5.1版本库建的工程模板
+  * @brief   用于从SD卡拷贝数据文件到FLASH的工程
   ******************************************************************************
   * @attention
   *
@@ -27,22 +27,19 @@
 #include "aux_data.h"
 
 
-#define USE_SPI_FLASH        0
 
-#define XBF_XINSONGTI25      1
-#define XBF_XINSONGTI19      1
-#define UNIGBK               1
-#define GB2312               1
-#define SD8782               1
 /**
   ******************************************************************************
   *                              定义变量
   ******************************************************************************
   */
-extern FIL fnew;													/* file objects */
-extern FATFS fs;													/* Work area (file system object) for logical drives */
-extern FRESULT result; 
-extern UINT  bw;            					    /* File R/W count */
+extern FATFS sd_fs;													/* Work area (file system object) for logical drives */
+extern FATFS flash_fs;
+
+//要复制的文件路径，到aux_data.c修改
+extern char src_dir[];
+extern char dst_dir[];
+
 
 /*
 *********************************************************************************************************
@@ -100,7 +97,7 @@ static void KEY1_INIT(void)
   */
 int main(void)
 {
-  FRESULT res;
+  FRESULT res = FR_OK;
   
 	BL8782_PDN_INIT();
 	/* 初始化LED */
@@ -110,17 +107,37 @@ int main(void)
   /* 初始化调试串口，一般为串口1 */
   Debug_USART_Config();
   TM_FATFS_FLASH_SPI_disk_initialize();
-
-    
-  printf("\r\n 按一次KEY1开始烧写字库 \r\n"); 
   
+  res = FR_DISK_ERR;
+       
+  //挂载SD卡
+  res = f_mount(&sd_fs,SD_ROOT,1);
+
+  //如果文件系统挂载失败就退出
+  if(res != FR_OK)
+  {
+    BURN_ERROR("f_mount ERROR!请给开发板插入SD卡然后重新复位开发板!");
+    LED_RED;
+    while(1);
+  }    
+    
+  printf("\r\n 按一次KEY1开始烧写字库并复制文件到FLASH。 \r\n"); 
+  printf("\r\n 注意该操作会把FLASH的原内容会被删除！！ \r\n"); 
+
   while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)==0);
   while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)==1); 
 
-  //烧录文件    
-   burn_file_sd2flash(burn_data,AUX_MAX_NUM);  
+    
+  //烧录数据到flash的非文件系统区域    
+  burn_file_sd2flash(burn_data,AUX_MAX_NUM); 
+  
+  //复制文件到FLASH的文件系统区域
+  copy_file_sd2flash(src_dir,dst_dir);
+  
 
-   while(1);
+
+  
+  while(1);
 
 
 }
