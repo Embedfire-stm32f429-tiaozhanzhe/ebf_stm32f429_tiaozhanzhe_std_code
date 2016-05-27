@@ -98,7 +98,7 @@ extern  Aux_Data_Typedef  burn_data[AUX_MAX_NUM];
                                        
                                        
 
-int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num);
-int copy_file_sd2flash(char *src_path,char *dst_path); 
+FRESULT burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num);
+FRESULT copy_file_sd2flash(char *src_path,char *dst_path); 
 
 #endif /* __BURN_DATA_H */

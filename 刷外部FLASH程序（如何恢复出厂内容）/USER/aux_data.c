@@ -158,8 +158,6 @@ FATFS sd_fs;													/* Work area (file system object) for logical drives */
 
 /*sd使用的文件系统变量*/
 static FIL fnew;													/* file objects */
-static FRESULT result; 
-static UINT  bw;            					    /* File R/W count */
  
 /**
   * @brief  向FLASH写入文件(写到非文件系统部分)
@@ -167,9 +165,13 @@ static UINT  bw;            					    /* File R/W count */
   * @param  file_num：要写入的文件个数
   * @retval 正常返回FR_OK
   */
-int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num) 
+FRESULT burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num) 
 {
     uint8_t i;
+  
+    FRESULT result; 
+    UINT  bw;            					    /* File R/W count */
+
 
     uint32_t write_addr=0,j=0;
     uint8_t tempbuf[256],flash_buf[256];
@@ -252,7 +254,7 @@ int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num)
           {
             BURN_ERROR("数据校验失败！");
             LED_RED;
-            return -1;
+            return FR_INT_ERR;
           }
          }  
      
@@ -270,7 +272,7 @@ int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num)
     
     
     BURN_INFO("************************************");
-    BURN_INFO("所有文件均已烧录成功！");
+    BURN_INFO("所有文件均已烧录成功！（非文件系统部分）");
     return FR_OK;
 
 
@@ -284,8 +286,9 @@ int burn_file_sd2flash(Aux_Data_Typedef *dat,uint8_t file_num)
   * @param  dst_path:要复制到哪个文件夹
   * @retval result:文件系统的返回值
   */
-int copy_file_sd2flash(char *src_path,char *dst_path) 
+FRESULT copy_file_sd2flash(char *src_path,char *dst_path) 
 {
+  FRESULT result; 
 
   BURN_INFO("-------------------------------------"); 
   //复制文件到flash的文件系统区域    
@@ -332,7 +335,8 @@ int copy_file_sd2flash(char *src_path,char *dst_path)
   scan_files(flash_scan_dir);
 
   BURN_INFO("*****************************************"); 
-  LED_GREEN;
+  BURN_INFO("所有文件均已复制成功！（文件系统部分）");
+  LED_BLUE;
   
   return result;
 
@@ -478,8 +482,12 @@ static int copy_dir(char *src_path,char *dst_path)
     //创建路径
     res = f_mkdir(dst_path); 
   
-    //创建成功或文件夹本来就存在则退出
-    require_noerr(!(res == FR_OK | res == FR_EXIST),exit);  
+    //文件夹本来就存在,正常
+    if(res == FR_EXIST)
+      res = FR_OK;
+  
+    //检查
+    require_noerr(res,exit);  
 
 exit:
     return res;

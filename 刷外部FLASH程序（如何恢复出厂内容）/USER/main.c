@@ -129,10 +129,29 @@ int main(void)
 
     
   //烧录数据到flash的非文件系统区域    
-  burn_file_sd2flash(burn_data,AUX_MAX_NUM); 
+  res = burn_file_sd2flash(burn_data,AUX_MAX_NUM); 
   
-  //复制文件到FLASH的文件系统区域
-  copy_file_sd2flash(src_dir,dst_dir);
+  if(res == FR_OK)
+  {
+    printf("\r\n\r\n\r\n"); 
+
+    //复制文件到FLASH的文件系统区域
+    copy_file_sd2flash(src_dir,dst_dir);
+    if(res == FR_OK)
+    {
+      printf("\r\n 所有数据已成功复制到FLASH！！！ \r\n");  
+      LED_GREEN;
+    }
+    else
+    {
+      printf("\r\n 复制文件到FLASH失败(文件系统部分)，请复位重试！！ \r\n"); 
+    }
+  }
+  else
+  {
+    printf("\r\n 拷贝数据到FLASH失败(非文件系统部分)，请复位重试！！ \r\n"); 
+  }
+  
   
 
 
