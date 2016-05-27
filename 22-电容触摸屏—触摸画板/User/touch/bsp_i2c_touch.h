@@ -29,14 +29,14 @@
 /*复位引脚*/
 #define GTP_RST_GPIO_PORT                GPIOD
 #define GTP_RST_GPIO_CLK                 RCC_AHB1Periph_GPIOD
-#define GTP_RST_GPIO_PIN                 GPIO_Pin_13
+#define GTP_RST_GPIO_PIN                 GPIO_Pin_11
 /*中断引脚*/
 #define GTP_INT_GPIO_PORT                GPIOD
 #define GTP_INT_GPIO_CLK                 RCC_AHB1Periph_GPIOD
-#define GTP_INT_GPIO_PIN                 GPIO_Pin_11
+#define GTP_INT_GPIO_PIN                 GPIO_Pin_13
 #define GTP_INT_EXTI_PORTSOURCE          EXTI_PortSourceGPIOD
-#define GTP_INT_EXTI_PINSOURCE           EXTI_PinSource11
-#define GTP_INT_EXTI_LINE                EXTI_Line11
+#define GTP_INT_EXTI_PINSOURCE           EXTI_PinSource13
+#define GTP_INT_EXTI_LINE                EXTI_Line13
 #define GTP_INT_EXTI_IRQ                 EXTI15_10_IRQn
 /*中断服务函数*/
 #define GTP_IRQHandler                   EXTI15_10_IRQHandler
