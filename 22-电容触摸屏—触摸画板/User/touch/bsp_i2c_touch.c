@@ -253,8 +253,10 @@ void I2C_Touch_Init(void)
 {
   I2C_GPIO_Config(); 
  
-  I2C_Mode_Config();
-
+#if !(SOFT_IIC) //Ó²¼þIICÄ£Ê½ 
+    I2C_Mode_Config();
+#endif
+  
   I2C_ResetChip();
 
   I2C_GTP_IRQEnable();
