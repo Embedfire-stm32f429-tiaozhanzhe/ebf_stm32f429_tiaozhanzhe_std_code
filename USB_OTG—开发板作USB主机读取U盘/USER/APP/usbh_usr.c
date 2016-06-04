@@ -139,7 +139,7 @@ void USBH_USR_Init(void)
 */
 void USBH_USR_DeviceAttached(void)
 {
-	USB_DEBUG("%s",(char *)MSG_DEV_ATTACHED);
+	USB_INFO("%s",(char *)MSG_DEV_ATTACHED);
 }
 
 
@@ -162,7 +162,7 @@ void USBH_USR_UnrecoveredError (void)
 */
 void USBH_USR_DeviceDisconnected (void)
 {
-	USB_DEBUG("%s",(char *)MSG_DEV_DISCONNECTED);
+	USB_INFO("%s",(char *)MSG_DEV_DISCONNECTED);
 }
 /**
 * @brief  USBH_USR_ResetUSBDevice

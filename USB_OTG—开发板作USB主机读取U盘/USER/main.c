@@ -79,7 +79,7 @@ int main(void)
             &USR_cb);
   
   printf("\r\n按下KEY1按键可扫描U盘中的文件，");
-  printf("\r\n按下KEY2按键可进行文件读写测试。");
+  printf("\r\n按下KEY2按键可进行文件读写测试。\r\n");
 
 	while(1)
 	{
