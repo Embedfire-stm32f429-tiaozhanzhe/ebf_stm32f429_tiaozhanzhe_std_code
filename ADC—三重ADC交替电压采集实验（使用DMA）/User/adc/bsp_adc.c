@@ -9,7 +9,7 @@
   * @attention
   *
   * 实验平台:秉火  STM32 F429 开发板   
-  * 论坛    :http://www.chuxue123.com
+  * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
   ******************************************************************************
