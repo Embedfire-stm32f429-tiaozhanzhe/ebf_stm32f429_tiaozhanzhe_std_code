@@ -1,1 +1,0 @@
-1. MAX_MGMT_IE_INDEX参数大小需要验证
