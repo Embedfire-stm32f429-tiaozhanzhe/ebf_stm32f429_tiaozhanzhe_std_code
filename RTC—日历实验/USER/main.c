@@ -59,10 +59,12 @@ int main(void)
 	 * RTC 是否已经配置过，如果配置过那就继续运行，如果没有配置过
 	 * 就初始化RTC，配置RTC的时间。
 	 */
+   
+  /* RTC配置：选择时钟源，设置RTC_CLK的分频系数 */
+  RTC_CLK_Config();
+
   if (RTC_ReadBackupRegister(RTC_BKP_DRX) != RTC_BKP_DATA)
   {
-    /* RTC配置：选择时钟源，设置RTC_CLK的分频系数 */
-    RTC_CLK_Config();
     /* 设置时间和日期 */
 		RTC_TimeAndDate_Set();
   }
