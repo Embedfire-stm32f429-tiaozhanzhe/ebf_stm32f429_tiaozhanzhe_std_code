@@ -5,9 +5,8 @@
 #include <stdio.h>
 
 
-#undef  USB_FLASH_SPI1
-#define USB_FLASH_SPI1   //使用SPI1控制读写外部SPI_FLASH芯片
-#undef  USB_FLASH_SPI3
+
+
 
 
 #define USB_SPI_TIMEOUT
@@ -45,33 +44,6 @@
 #define Dummy_Byte                          0xFF
 
 
-#ifdef USB_FLASH_SPI3
-/*SPI接口*/
-#define FLASH_SPI                           SPI5
-#define FLASH_SPI_CLK                       RCC_APB2Periph_SPI5
-#define FLASH_SPI_CLK_INIT                  RCC_APB2PeriphClockCmd
-
-#define FLASH_SPI_SCK_PIN                   GPIO_Pin_7                  
-#define FLASH_SPI_SCK_GPIO_PORT             GPIOF                       
-#define FLASH_SPI_SCK_GPIO_CLK              RCC_AHB1Periph_GPIOF
-#define FLASH_SPI_SCK_PINSOURCE             GPIO_PinSource7
-#define FLASH_SPI_SCK_AF                    GPIO_AF_SPI5
-
-#define FLASH_SPI_MISO_PIN                  GPIO_Pin_8                
-#define FLASH_SPI_MISO_GPIO_PORT            GPIOF                   
-#define FLASH_SPI_MISO_GPIO_CLK             RCC_AHB1Periph_GPIOF
-#define FLASH_SPI_MISO_PINSOURCE            GPIO_PinSource8
-#define FLASH_SPI_MISO_AF                   GPIO_AF_SPI5
-
-#define FLASH_SPI_MOSI_PIN                  GPIO_Pin_9                
-#define FLASH_SPI_MOSI_GPIO_PORT            GPIOF                    
-#define FLASH_SPI_MOSI_GPIO_CLK             RCC_AHB1Periph_GPIOF
-#define FLASH_SPI_MOSI_PINSOURCE            GPIO_PinSource9
-#define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI5
-
-#endif  //end #ifdef USB_FLASH_SPI3 
-
-#ifdef  USB_FLASH_SPI1
 /*SPI接口*/
 #define FLASH_SPI                           SPI5
 #define FLASH_SPI_CLK                       RCC_APB2Periph_SPI5
@@ -96,7 +68,7 @@
 #define FLASH_SPI_MOSI_AF                   GPIO_AF_SPI5
 
 
-#endif  //end #ifdef USB_FLASH_SPI1 
+ 
 
 #define FLASH_CS_PIN                        GPIO_Pin_6                 
 #define FLASH_CS_GPIO_PORT                  GPIOF                      

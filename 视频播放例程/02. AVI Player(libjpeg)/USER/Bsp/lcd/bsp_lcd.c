@@ -110,81 +110,92 @@ static void LCD_GPIO_Config(void);
   * @retval None
   */
 
-#define HBP  65
-#define VBP   32
+/*根据液晶数据手册的参数配置*/
+#define HBP  46		//HSYNC后的无效像素
+#define VBP  23		//VSYNC后的无效行数
 
-#define HSW   19
-#define VSW   9
+#define HSW   1		//HSYNC宽度
+#define VSW   1		//VSYNC宽度
 
-#define HFP  10
-#define VFP   4
+#define HFP  20		//HSYNC前的无效像素
+#define VFP   22		//VSYNC前的无效行数
 
+
+/**
+  * @brief LCD参数配置
+  * @note  这个函数用于配置LTDC外设:
+  *        1)配置像素同步时钟CLK
+  *        2)配置LTDC时间参数及信号极性
+  * @retval  None 
+  */
 void LCD_Init(void)
 { 
   LTDC_InitTypeDef       LTDC_InitStruct;
   
-  /* Enable the LTDC Clock */
+  /* 使能LTDC外设时钟 */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_LTDC, ENABLE);
   
-  /* Enable the DMA2D Clock */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2D, ENABLE); 
-  
-  /* Configure the LCD Control pins */
-  LCD_GPIO_Config();  
-  
-  /* Configure the FMC Parallel interface : SDRAM is used as Frame Buffer for LCD */
+  /* 使能DMA2D时钟 */
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2D, ENABLE);
+	
+	/* 初始化LCD的控制引脚 */
+  LCD_GPIO_Config();   
+	
+	/* 初始化SDRAM，以便使用SDRAM作显存 */
   SDRAM_Init();
-  
-  /* LTDC Configuration *********************************************************/  
-  /* Polarity configuration */
-  /* Initialize the horizontal synchronization polarity as active low */
-  LTDC_InitStruct.LTDC_HSPolarity = LTDC_HSPolarity_AL;     
-  /* Initialize the vertical synchronization polarity as active low */  
-  LTDC_InitStruct.LTDC_VSPolarity = LTDC_VSPolarity_AL;
-  /* Initialize the data enable polarity as active low */
-  LTDC_InitStruct.LTDC_DEPolarity = LTDC_DEPolarity_AL;     
-  /* Initialize the pixel clock polarity as input pixel clock */ 
-  LTDC_InitStruct.LTDC_PCPolarity = LTDC_PCPolarity_IPC;
-  
-  /* Configure R,G,B component values for LCD background color */                   
-  LTDC_InitStruct.LTDC_BackgroundRedValue = 0;            
-  LTDC_InitStruct.LTDC_BackgroundGreenValue = 0;          
-  LTDC_InitStruct.LTDC_BackgroundBlueValue = 0;  
-  
-  /* Configure PLLSAI prescalers for LCD */
-  /* Enable Pixel Clock */
-  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAI_N = 192 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAI_R = 192/4 = 48 Mhz */
-  /* LTDC clock frequency = PLLLCDCLK / RCC_PLLSAIDivR = 48/8 = 6 Mhz */
-  RCC_PLLSAIConfig(416, 7, 4);
+	
+	/* 配置 PLLSAI 分频器，它的输出作为像素同步时钟CLK*/
+  /* PLLSAI_VCO 输入时钟 = HSE_VALUE/PLL_M = 1 Mhz */
+  /* PLLSAI_VCO 输出时钟 = PLLSAI_VCO输入 * PLLSAI_N = 416 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO 输出/PLLSAI_R = 420/6  Mhz */
+  /* LTDC 时钟频率 = PLLLCDCLK / DIV = 420/6/8 = 8.75 Mhz */
+	/* LTDC时钟太高会导花屏，若对刷屏速度要求不高，降低时钟频率可减少花屏现象*/
+	/* 以下函数三个参数分别为：PLLSAIN,PLLSAIQ,PLLSAIR，其中PLLSAIQ与LTDC无关*/
+  RCC_PLLSAIConfig(420,7, 6);
+	/*以下函数的参数为DIV值*/
   RCC_LTDCCLKDivConfig(RCC_PLLSAIDivR_Div8);
   
-  /* Enable PLLSAI Clock */
+  /* 使能 PLLSAI 时钟 */
   RCC_PLLSAICmd(ENABLE);
-  /* Wait for PLLSAI activation */
+  /* 等待 PLLSAI 初始化完成 */
   while(RCC_GetFlagStatus(RCC_FLAG_PLLSAIRDY) == RESET)
   {
   }
   
-  /* Timing configuration */  
-	/* Configure horizontal synchronization width */
-	LTDC_InitStruct.LTDC_HorizontalSync =HSW;
-	/* Configure vertical synchronization height */
-	LTDC_InitStruct.LTDC_VerticalSync = VSW;
-	/* Configure accumulated horizontal back porch */
-	LTDC_InitStruct.LTDC_AccumulatedHBP =HBP;
-	/* Configure accumulated vertical back porch */
-	LTDC_InitStruct.LTDC_AccumulatedVBP = VBP;
-	/* Configure accumulated active width */
-	LTDC_InitStruct.LTDC_AccumulatedActiveW = LCD_PIXEL_WIDTH+HBP;
-	/* Configure accumulated active height */
-	LTDC_InitStruct.LTDC_AccumulatedActiveH = LCD_PIXEL_HEIGHT+VBP;
-	/* Configure total width */
-	LTDC_InitStruct.LTDC_TotalWidth =LCD_PIXEL_WIDTH + HBP + HFP; 
-	/* Configure total height */
-	LTDC_InitStruct.LTDC_TotalHeigh =LCD_PIXEL_HEIGHT + VBP + VFP;
+  /* LTDC配置*********************************************************/  
+  /*信号极性配置*/
+  /* 行同步信号极性 */
+  LTDC_InitStruct.LTDC_HSPolarity = LTDC_HSPolarity_AL;     
+  /* 垂直同步信号极性 */  
+  LTDC_InitStruct.LTDC_VSPolarity = LTDC_VSPolarity_AL;     
+  /* 数据使能信号极性 */
+  LTDC_InitStruct.LTDC_DEPolarity = LTDC_DEPolarity_AL;     
+  /* 像素同步时钟极性 */ 
+  LTDC_InitStruct.LTDC_PCPolarity = LTDC_PCPolarity_IPC;
   
+  /* 配置LCD背景颜色 */                   
+  LTDC_InitStruct.LTDC_BackgroundRedValue = 0;            
+  LTDC_InitStruct.LTDC_BackgroundGreenValue = 0;          
+  LTDC_InitStruct.LTDC_BackgroundBlueValue = 0;    
+ 
+  /* 时间参数配置 */  
+ /* 配置行同步信号宽度(HSW-1) */
+ LTDC_InitStruct.LTDC_HorizontalSync =HSW-1;
+ /* 配置垂直同步信号宽度(VSW-1) */
+ LTDC_InitStruct.LTDC_VerticalSync = VSW-1;
+ /* 配置(HSW+HBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedHBP =HSW+HBP-1;
+ /* 配置(VSW+VBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedVBP = VSW+VBP-1;
+ /* 配置(HSW+HBP+有效像素宽度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveW = HSW+HBP+LCD_PIXEL_WIDTH-1;
+ /* 配置(VSW+VBP+有效像素高度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveH = VSW+VBP+LCD_PIXEL_HEIGHT-1;
+ /* 配置总宽度(HSW+HBP+有效像素宽度+HFP-1) */
+ LTDC_InitStruct.LTDC_TotalWidth =HSW+ HBP+LCD_PIXEL_WIDTH  + HFP-1; 
+ /* 配置总高度(VSW+VBP+有效像素高度+VFP-1) */
+ LTDC_InitStruct.LTDC_TotalHeigh =VSW+ VBP+LCD_PIXEL_HEIGHT  + VFP-1;
+
   LTDC_Init(&LTDC_InitStruct);
   
   LTDC_Cmd(ENABLE);
@@ -197,18 +208,19 @@ void LCD_Init(void)
   */
 void LCD_LayerInit(void)
 {
+
   LTDC_Layer_InitTypeDef LTDC_Layer_InitStruct; 
   
-  /* Windowing configuration */
-  /* In this case all the active display area is used to display a picture then :
-  Horizontal start = horizontal synchronization + Horizontal back porch = 30 
-  Horizontal stop = Horizontal start + window width -1 = 30 + 240 -1
-  Vertical start   = vertical synchronization + vertical back porch     = 4
-  Vertical stop   = Vertical start + window height -1  = 4 + 320 -1      */      
-	LTDC_Layer_InitStruct.LTDC_HorizontalStart = HBP + 1;
-	LTDC_Layer_InitStruct.LTDC_HorizontalStop = (LCD_PIXEL_WIDTH + HBP);
-	LTDC_Layer_InitStruct.LTDC_VerticalStart =  VBP + 1;
-	LTDC_Layer_InitStruct.LTDC_VerticalStop = (LCD_PIXEL_HEIGHT + VBP);
+  /* 层窗口配置 */
+  /* 配置本层的窗口边界，注意这些参数是包含HBP HSW VBP VSW的 */    
+	//一行的第一个起始像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedHBP+1)的值
+	LTDC_Layer_InitStruct.LTDC_HorizontalStart = HBP + HSW;
+	//一行的最后一个像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedActiveW)的值
+	LTDC_Layer_InitStruct.LTDC_HorizontalStop = HSW+HBP+LCD_PIXEL_WIDTH-1;
+	//一列的第一个起始像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedVBP+1)的值
+	LTDC_Layer_InitStruct.LTDC_VerticalStart =  VBP + VSW;
+	//一列的最后一个像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedActiveH)的值
+	LTDC_Layer_InitStruct.LTDC_VerticalStop = VSW+VBP+LCD_PIXEL_HEIGHT-1;
   
   /* Pixel Format configuration*/
   LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_RGB888;
@@ -1845,14 +1857,17 @@ static void LCD_GPIO_Config(void);
  * @retval None
  */
 
-#define HBP  24
-#define VBP   3
+/*根据液晶数据手册的参数配置*/
+#define HBP  46		//HSYNC后的无效像素
+#define VBP  23		//VSYNC后的无效行数
 
-#define HSW   6
-#define VSW   1
+#define HSW   1		//HSYNC宽度
+#define VSW   1		//VSYNC宽度
 
-#define HFP  10
-#define VFP   4
+#define HFP  20		//HSYNC前的无效像素
+#define VFP   22		//VSYNC前的无效行数
+
+
 
 void LCD_Init(void)
 {
@@ -1886,13 +1901,15 @@ void LCD_Init(void)
  LTDC_InitStruct.LTDC_BackgroundGreenValue = 0;
  LTDC_InitStruct.LTDC_BackgroundBlueValue = 0;
 
- /* Configure PLLSAI prescalers for LCD */
- /* Enable Pixel Clock */
- /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
- /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAI_N = 192 Mhz */
- /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAI_R = 192/4 = 48 Mhz */
- /* LTDC clock frequency = PLLLCDCLK / RCC_PLLSAIDivR = 48/8 = 6 Mhz */
+	/* 配置 PLLSAI 分频器，它的输出作为像素同步时钟CLK*/
+  /* PLLSAI_VCO 输入时钟 = HSE_VALUE/PLL_M = 1 Mhz */
+  /* PLLSAI_VCO 输出时钟 = PLLSAI_VCO输入 * PLLSAI_N = 384 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO 输出/PLLSAI_R = 384/6  Mhz */
+  /* LTDC 时钟频率 = PLLLCDCLK / DIV = 384/4/4 = 24 Mhz */
+	/* LTDC时钟太高会导花屏，若对刷屏速度要求不高，降低时钟频率可减少花屏现象*/
+	/* 以下函数三个参数分别为：PLLSAIN,PLLSAIQ,PLLSAIR，其中PLLSAIQ与LTDC无关*/
  RCC_PLLSAIConfig(384, 7, 4);
+ 	/*以下函数的参数为DIV值*/
  RCC_LTDCCLKDivConfig(RCC_PLLSAIDivR_Div4);
 
  /* Enable PLLSAI Clock */
@@ -1902,23 +1919,23 @@ void LCD_Init(void)
  {
  }
 
- /* Timing configuration */
- /* Configure horizontal synchronization width */
- LTDC_InitStruct.LTDC_HorizontalSync =HSW;
- /* Configure vertical synchronization height */
- LTDC_InitStruct.LTDC_VerticalSync = VSW;
- /* Configure accumulated horizontal back porch */
- LTDC_InitStruct.LTDC_AccumulatedHBP =HBP;
- /* Configure accumulated vertical back porch */
- LTDC_InitStruct.LTDC_AccumulatedVBP = VBP;
- /* Configure accumulated active width */
- LTDC_InitStruct.LTDC_AccumulatedActiveW = LCD_PIXEL_WIDTH+HBP;
- /* Configure accumulated active height */
- LTDC_InitStruct.LTDC_AccumulatedActiveH = LCD_PIXEL_HEIGHT+VBP;
- /* Configure total width */
- LTDC_InitStruct.LTDC_TotalWidth =LCD_PIXEL_WIDTH + HBP + HFP; 
- /* Configure total height */
- LTDC_InitStruct.LTDC_TotalHeigh =LCD_PIXEL_HEIGHT + VBP + VFP;
+  /* 时间参数配置 */  
+ /* 配置行同步信号宽度(HSW-1) */
+ LTDC_InitStruct.LTDC_HorizontalSync =HSW-1;
+ /* 配置垂直同步信号宽度(VSW-1) */
+ LTDC_InitStruct.LTDC_VerticalSync = VSW-1;
+ /* 配置(HSW+HBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedHBP =HSW+HBP-1;
+ /* 配置(VSW+VBP-1) */
+ LTDC_InitStruct.LTDC_AccumulatedVBP = VSW+VBP-1;
+ /* 配置(HSW+HBP+有效像素宽度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveW = HSW+HBP+LCD_PIXEL_WIDTH-1;
+ /* 配置(VSW+VBP+有效像素高度-1) */
+ LTDC_InitStruct.LTDC_AccumulatedActiveH = VSW+VBP+LCD_PIXEL_HEIGHT-1;
+ /* 配置总宽度(HSW+HBP+有效像素宽度+HFP-1) */
+ LTDC_InitStruct.LTDC_TotalWidth =HSW+ HBP+LCD_PIXEL_WIDTH  + HFP-1; 
+ /* 配置总高度(VSW+VBP+有效像素高度+VFP-1) */
+ LTDC_InitStruct.LTDC_TotalHeigh =VSW+ VBP+LCD_PIXEL_HEIGHT  + VFP-1;
 
  LTDC_Init(&LTDC_InitStruct);
 }
@@ -1932,16 +1949,16 @@ void LCD_LayerInit(void)
 {
  LTDC_Layer_InitTypeDef LTDC_Layer_InitStruct;
 
- /* Windowing configuration */
- /* In this case all the active display area is used to display a picture then :
- Horizontal start = horizontal synchronization + Horizontal back porch = 30
- Horizontal stop = Horizontal start + window width -1 = 30 + 240 -1
- Vertical start   = vertical synchronization + vertical back porch     = 4
- Vertical stop   = Vertical start + window height -1  = 4 + 320 -1      */
- LTDC_Layer_InitStruct.LTDC_HorizontalStart = HBP + 1;
- LTDC_Layer_InitStruct.LTDC_HorizontalStop = (LCD_PIXEL_WIDTH + HBP);
- LTDC_Layer_InitStruct.LTDC_VerticalStart =  VBP + 1;
- LTDC_Layer_InitStruct.LTDC_VerticalStop = (LCD_PIXEL_HEIGHT + VBP);
+  /* 层窗口配置 */
+  /* 配置本层的窗口边界，注意这些参数是包含HBP HSW VBP VSW的 */    
+	//一行的第一个起始像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedHBP+1)的值
+	LTDC_Layer_InitStruct.LTDC_HorizontalStart = HBP + HSW;
+	//一行的最后一个像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedActiveW)的值
+	LTDC_Layer_InitStruct.LTDC_HorizontalStop = HSW+HBP+LCD_PIXEL_WIDTH-1;
+	//一列的第一个起始像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedVBP+1)的值
+	LTDC_Layer_InitStruct.LTDC_VerticalStart =  VBP + VSW;
+	//一列的最后一个像素，该成员值应用为 (LTDC_InitStruct.LTDC_AccumulatedActiveH)的值
+	LTDC_Layer_InitStruct.LTDC_VerticalStop = VSW+VBP+LCD_PIXEL_HEIGHT-1;
 
  /* Pixel Format configuration*/
  LTDC_Layer_InitStruct.LTDC_PixelFormat = LTDC_Pixelformat_RGB565;
