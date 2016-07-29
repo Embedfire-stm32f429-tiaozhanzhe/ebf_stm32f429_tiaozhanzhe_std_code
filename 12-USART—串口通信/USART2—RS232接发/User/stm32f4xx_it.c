@@ -148,7 +148,7 @@ void SysTick_Handler(void)
 
 extern uint8_t Rxflag;
 extern uint8_t ucTemp;
-void DEBUG_USART_IRQHandler(void)
+void RS232_USART_IRQHandler(void)
 {
 	if(USART_GetITStatus( RS232_USART, USART_IT_RXNE ) != RESET)
 	{		
