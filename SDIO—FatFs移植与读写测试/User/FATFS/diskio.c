@@ -216,7 +216,7 @@ DRESULT disk_ioctl (
 				break;
 				// Get erase block size in unit of sector (DWORD)
 				case GET_BLOCK_SIZE :      
-					*(DWORD * )buff = SDCardInfo.CardBlockSize;
+					*(DWORD * )buff = 1;//SDCardInfo.CardBlockSize;
 				break;
 
 				case GET_SECTOR_COUNT:
