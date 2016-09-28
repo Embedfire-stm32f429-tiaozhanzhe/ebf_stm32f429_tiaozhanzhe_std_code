@@ -25,9 +25,9 @@ const uint16_t Sine12bit[32] = {
 	156,39,0,39,156,345,600,910,1264,1648,2048
 };
 
-
 uint32_t DualSine12bit[32];
 
+DAC_InitTypeDef  DAC_InitStructure;
 
 /**
   * @brief  使能DAC的时钟，初始化GPIO
@@ -37,7 +37,8 @@ uint32_t DualSine12bit[32];
 static void DAC_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-	DAC_InitTypeDef  DAC_InitStructure;
+//经测试DAC_InitStructure必须为全局变量或静态变量
+//	DAC_InitTypeDef  DAC_InitStructure;
 
   /* 使能GPIOA时钟 */
   RCC_AHB1PeriphClockCmd(DAC_CH1_GPIO_CLK|DAC_CH2_GPIO_CLK, ENABLE);	
@@ -45,8 +46,6 @@ static void DAC_Config(void)
 	/* 使能DAC时钟 */	
   RCC_APB1PeriphClockCmd(DAC_CLK, ENABLE);
   
-
-	
   /* DAC的GPIO配置，模拟输入 */
   GPIO_InitStructure.GPIO_Pin =  DAC_CH1_GPIO_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
@@ -56,9 +55,7 @@ static void DAC_Config(void)
   GPIO_InitStructure.GPIO_Pin =  DAC_CH2_GPIO_PIN;
   GPIO_Init(DAC_CH2_GPIO_PORT, &GPIO_InitStructure);
 	
-
-
-  /* 配置DAC 通道1 */
+		  /* 配置DAC 通道1 */
   DAC_InitStructure.DAC_Trigger = DAC_TRIGGER;						//使用TIM2作为触发源
   DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;	//不使用波形发生器
   DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;	//不使用DAC输出缓冲
@@ -66,15 +63,14 @@ static void DAC_Config(void)
 
   /* 配置DAC 通道2 */
   DAC_Init(DAC_CH2_CHANNEL, &DAC_InitStructure);
-
-  /* 使能通道1 由PA4输出 */
-  DAC_Cmd(DAC_CH1_CHANNEL, ENABLE);
-  /* 使能通道2 由PA5输出 */
-  DAC_Cmd(DAC_CH2_CHANNEL, ENABLE);
-
   
-    /* 使能DAC的DMA请求 */
-  DAC_DMACmd(DAC_CH1_CHANNEL, ENABLE);
+	/* 配置DAC 通道1、2 */
+  DAC_Cmd(DAC_Channel_1, ENABLE);
+  DAC_Cmd(DAC_Channel_2, ENABLE);
+	
+	/* 使能 DAC的DMA请求 */
+  DAC_DMACmd(DAC_Channel_1, ENABLE);
+
 }
 
 
@@ -138,11 +134,13 @@ static void DAC_DMA_Config(void)
 
   DMA_Init(DAC_DMA_STREAM, &DMA_InitStructure);
   
-  /* Enable DMA_Stream */
+  /* 使能 DMA_Stream */
   DMA_Cmd(DAC_DMA_STREAM, ENABLE);
   
 
 }
+
+
 
 
 /**
@@ -163,28 +161,8 @@ void DAC_Mode_Init(void)
   {
     DualSine12bit[Idx] = (Sine12bit[Idx] << 16) + (Sine12bit[Idx]);
   }
-  
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
