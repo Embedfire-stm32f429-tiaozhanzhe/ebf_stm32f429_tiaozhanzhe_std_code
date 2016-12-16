@@ -32,9 +32,9 @@ void Delay(__IO u32 nCount);
 
 
 //定义变量到SDRAM
-uint32_t testValue  =0 ;
+uint32_t testValue  =7 ;
 //定义变量到SDRAM
-uint32_t testValue2  =7;
+uint32_t testValue2  =0;
 
 
 
@@ -44,7 +44,7 @@ uint8_t testGrup[100]  ={0};
 uint8_t testGrup2[100] ={1,2,3};
 
 
-/*本实验中的sct配置，堆区工作不正常，使用malloc无法得到正常的地址，不推荐在实际工程应用*/
+/*本实验中的sct配置，堆区可能工作不正常，使用malloc无法得到正常的地址，不推荐在实际工程应用*/
 /*另一种我们推荐的配置请参考教程中的说明*/
 
 /**
@@ -83,7 +83,7 @@ int main(void)
 	printf("结果：它的地址为：0x%x,变量值为：%d，%d,%d\r\n",(uint32_t)&testGrup2,testGrup2[0],testGrup2[1],testGrup2[2]);
 	
 	
-	/*本实验中的sct配置，堆区工作不正常，使用malloc无法得到正常的地址，不推荐在实际工程应用*/
+	/*本实验中的sct配置，堆区可能工作不正常，使用malloc无法得到正常的地址，不推荐在实际工程应用*/
   /*另一种我们推荐的配置请参考教程中的说明*/
 	
 	uint32_t * pointer = (uint32_t*)malloc(sizeof(uint32_t)*3); 
@@ -106,7 +106,7 @@ int main(void)
 	{
 		printf("\r\n使用malloc动态分配变量出错！！！\r\n");	
 	}
-  /*蓝灯亮，表示正在读写SDRAM测试*/
+
   LED_BLUE; 
 	
 
