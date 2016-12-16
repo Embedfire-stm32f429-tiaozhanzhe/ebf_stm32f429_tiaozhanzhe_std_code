@@ -10,7 +10,7 @@
   *
   * 实验平台:野火 iSO STM32 开发板 
   * 论坛    :http://www.firebbs.cn
-  * 淘宝    :http://firestm32.taobao.com
+  * 淘宝    :https://fire-stm32.taobao.com
   *
   ******************************************************************************
   */
