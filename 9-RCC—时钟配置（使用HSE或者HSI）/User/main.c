@@ -1,4 +1,21 @@
-
+/**
+  ******************************************************************************
+  * @file    main.c
+  * @author  fire
+  * @version V1.0
+  * @date    2015-xx-xx
+  * @brief   RCC 时钟配置
+  ******************************************************************************
+  * @attention
+  *
+  * 实验平台:秉火  STM32 F429 开发板 
+  * 论坛    :http://www.firebbs.cn
+  * 淘宝    :https://fire-stm32.taobao.com
+  *
+  ******************************************************************************
+  */
+	
+	
 // 使用HSE或者HSI 配置系统时钟
 #include "stm32f4xx.h"
 #include "./rcc/bsp_clkconfig.h"
@@ -15,9 +32,9 @@ void Delay(__IO u32 nCount);
   */
 int main(void)
 {
-	// 程序来到main函数之前，启动文件：statup_stm32f10x_hd.s已经调用
+	// 程序来到main函数之前，启动文件：statup_stm32f429_439xx.s已经调用
 	// SystemInit()函数把系统时钟初始化成72MHZ
-	// SystemInit()在system_stm32f10x.c中定义
+	// SystemInit()在system_stm32f4xx.c中定义
 	// 如果用户想修改系统时钟，可自行编写程序修改	
 	// 重新设置系统时钟，这时候可以选择使用HSE还是HSI
 	
