@@ -60,11 +60,11 @@
 【*】 引脚分配
 
 FLASH(W25Q128)：
-FLASH芯片的SPI接口与STM32的SPI3相连。
-		SCK	<--->PB3
-		MISO<--->PB4
-		MOSI<--->PB5
-		CS	<--->PI8
+FLASH芯片的SPI接口与STM32的SPI5相连。
+		SCK	<--->PF7
+		MISO<--->PF8
+		MOSI<--->PF9
+		CS	<--->PF6
 
 串口(TTL-USB TO USART)：
 CH340的收发引脚与STM32的发收引脚相连。

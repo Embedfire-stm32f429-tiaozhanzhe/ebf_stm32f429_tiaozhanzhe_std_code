@@ -68,11 +68,11 @@ SDRAM芯片的接口与STM32的FMC相连。
 地址和数据信号线省略，本连接的SDRAM基地址为 (0xD0000000)，结束地址为(0xD0800000),大小为8M字节
 
 FLASH(W25Q128)：
-FLASH芯片的SPI接口与STM32的SPI3相连。
-		SCK	<--->PB3
-		MISO<--->PB4
-		MOSI<--->PB5
-		CS	<--->PI8
+FLASH芯片的SPI接口与STM32的SPI5相连。
+		SCK	<--->PF7
+		MISO<--->PF8
+		MOSI<--->PF9
+		CS	<--->PF6
 
 串口(TTL-USB TO USART)：
 CH340的收发引脚与STM32的发收引脚相连。
