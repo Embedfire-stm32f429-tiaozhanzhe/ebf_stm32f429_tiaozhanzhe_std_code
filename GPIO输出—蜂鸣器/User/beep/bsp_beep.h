@@ -16,9 +16,9 @@
 
 /* 带参宏，可以像内联函数一样使用 */
 #define BEEP(a)	if (a)	\
-					GPIO_SetBits(macBEEP_GPIO_PORT,macBEEP_GPIO_PIN);\
+					GPIO_SetBits(BEEP_GPIO_PORT,BEEP_GPIO_PIN);\
 					else		\
-					GPIO_ResetBits(macBEEP_GPIO_PORT,macBEEP_GPIO_PIN)
+					GPIO_ResetBits(BEEP_GPIO_PIN)
 					
 /* 直接操作寄存器的方法控制IO */
 #define	digitalHi(p,i)			{p->BSRRL=i;}			  //设置为高电平		
