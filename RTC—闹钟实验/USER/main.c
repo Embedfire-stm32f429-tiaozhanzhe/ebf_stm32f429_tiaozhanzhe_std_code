@@ -66,7 +66,7 @@ int main(void)
   /* RTC配置：选择时钟源，设置RTC_CLK的分频系数 */
   RTC_CLK_Config();
    
-  if (RTC_ReadBackupRegister(RTC_BKP_DRX) != 0X32F3)
+  if (RTC_ReadBackupRegister(RTC_BKP_DRX) != RTC_BKP_DATA)
   {		
 		/* 闹钟设置 */
 		RTC_AlarmSet();

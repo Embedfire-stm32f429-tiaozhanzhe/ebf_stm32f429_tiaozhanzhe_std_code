@@ -28,8 +28,8 @@
 
 /* 定义控制IO的宏 */
 #define BEEP_TOGGLE		digitalToggle(BEEP_GPIO_PORT,BEEP_GPIO_PIN)
-#define BEEP_OFF				digitalHi(BEEP_GPIO_PORT,BEEP_GPIO_PIN)
-#define BEEP_ON				digitalLo(BEEP_GPIO_PORT,BEEP_GPIO_PIN)
+#define BEEP_OFF			digitalLo(BEEP_GPIO_PORT,BEEP_GPIO_PIN)
+#define BEEP_ON				digitalHi(BEEP_GPIO_PORT,BEEP_GPIO_PIN)
 
 void BEEP_GPIO_Config(void);
 					
