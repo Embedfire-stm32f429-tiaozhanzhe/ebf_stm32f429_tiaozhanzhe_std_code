@@ -60,7 +60,7 @@ static void TIM_Mode_Config(void)
   //当定时器从0计数到4999，即为5000次，为一个定时周期
   TIM_TimeBaseStructure.TIM_Period = 10000-1;       
 	
-	// 高级控制定时器时钟源TIMxCLK = HCLK/2=90MHz 
+	// 通用控制定时器时钟源TIMxCLK = HCLK/2=90MHz 
 	// 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=10000Hz
   TIM_TimeBaseStructure.TIM_Prescaler = 9000-1;	
   // 采样时钟分频

@@ -66,7 +66,7 @@ static void TIM_PWMOUTPUT_Config(void)
   //当定时器从0计数到8999，即为9000次，为一个定时周期
   TIM_TimeBaseStructure.TIM_Period = 9000-1;       
 	
-	// 高级控制定时器时钟源TIMxCLK = HCLK/2=90MHz 
+	// 通用控制定时器时钟源TIMxCLK = HCLK/2=90MHz 
 	// 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=100KHz
   TIM_TimeBaseStructure.TIM_Prescaler = 900-1;	
   // 采样时钟分频
@@ -93,7 +93,7 @@ static void TIM_PWMOUTPUT_Config(void)
 }
 
 /**
-  * @brief  初始化高级控制定时器定时，1ms产生一次中断
+  * @brief  初始化通用控制定时器定时
   * @param  无
   * @retval 无
   */

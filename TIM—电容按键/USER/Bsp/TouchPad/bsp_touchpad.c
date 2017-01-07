@@ -168,7 +168,7 @@ uint8_t TPAD_Init(void)
 	uint32_t temp=0;
 	uint8_t j,i;
 	
-	//设定定时器预分频器目标时钟为：9MHz(180Mhz/20)
+	//设定定时器预分频器目标时钟为：4.5MHz(90Mhz/20)
 	TIMx_CHx_Cap_Init(TPAD_ARR_MAX_VAL,20-1);
 	for(i=0;i<10;i++)//连续读取10次
 	{				 

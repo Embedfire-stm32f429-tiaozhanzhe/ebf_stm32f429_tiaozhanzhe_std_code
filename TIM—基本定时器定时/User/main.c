@@ -29,7 +29,7 @@ int main(void)
 
 	LED_GPIO_Config();
 
-  /* 初始化基本定时器定时，1s产生一次中断 */
+  /* 初始化基本定时器定时，0.5s产生一次中断 */
 	TIMx_Configuration();
   
   while(1)
