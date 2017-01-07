@@ -3,82 +3,58 @@
 
 #include "stm32f4xx.h"
 
-//引脚定义
-/*******************************************************/
-//R 红色灯
-#define COLOR_LED1_PIN                  GPIO_Pin_10                 
-#define COLOR_LED1_GPIO_PORT            GPIOH                      
-#define COLOR_LED1_GPIO_CLK             RCC_AHB1Periph_GPIOH
-#define COLOR_LED1_PINSOURCE						GPIO_PinSource10
-#define COLOR_LED1_AF										GPIO_AF_TIM5
+
+/********************定时器通道**************************/
+
+#define COLOR_TIM           						TIM5
+#define COLOR_TIM_CLK       						RCC_APB1Periph_TIM5
+#define COLOR_TIM_APBxClock_FUN        RCC_APB1PeriphClockCmd
+
+#define COLOR_TIM_GPIO_CLK             (RCC_AHB1Periph_GPIOH)
 
 
+/************红灯***************/
 
-//G 绿色灯
-#define COLOR_LED2_PIN                  GPIO_Pin_11                 
-#define COLOR_LED2_GPIO_PORT            GPIOH                      
-#define COLOR_LED2_GPIO_CLK             RCC_AHB1Periph_GPIOH
-#define COLOR_LED2_PINSOURCE						GPIO_PinSource11
-#define COLOR_LED2_AF										GPIO_AF_TIM5
+#define COLOR_RED_PIN                  GPIO_Pin_10                 
+#define COLOR_RED_GPIO_PORT            GPIOH                      
+#define COLOR_RED_PINSOURCE						GPIO_PinSource10
+#define COLOR_RED_AF										GPIO_AF_TIM5
 
-//B 蓝色灯
-#define COLOR_LED3_PIN                  GPIO_Pin_12                 
-#define COLOR_LED3_GPIO_PORT            GPIOH                       
-#define COLOR_LED3_GPIO_CLK             RCC_AHB1Periph_GPIOH
-#define COLOR_LED3_PINSOURCE						GPIO_PinSource12
-#define COLOR_LED3_AF										GPIO_AF_TIM5
+#define  COLOR_RED_TIM_OCxInit                TIM_OC1Init            //通道初始化函数
+#define  COLOR_RED_TIM_OCxPreloadConfig       TIM_OC1PreloadConfig //通道重载配置函数
 
-//小指示灯，普通IO口，不能用PWM控制
-#define LED4_PIN                  GPIO_Pin_11                 
-#define LED4_GPIO_PORT            GPIOD                       
-#define LED4_GPIO_CLK             RCC_AHB1Periph_GPIOD
+//通道比较寄存器，以TIMx->CCRx方式可访问该寄存器，设置新的比较值，控制占空比
+//以宏封装后，使用这种形式：COLOR_TIMx->COLOR_RED_CCRx ，可访问该通道的比较寄存器
+#define  COLOR_RED_CCRx                       	CCR1		
+
+/************绿灯***************/
+#define COLOR_GREEN_PIN                  GPIO_Pin_11                 
+#define COLOR_GREEN_GPIO_PORT            GPIOH                      
+#define COLOR_GREEN_PINSOURCE						GPIO_PinSource11
+#define COLOR_GREEN_AF										GPIO_AF_TIM5
+
+#define  COLOR_GREEN_TIM_OCxInit                TIM_OC2Init            //通道初始化函数
+#define  COLOR_GREEN_TIM_OCxPreloadConfig       TIM_OC2PreloadConfig //通道重载配置函数
+
+//通道比较寄存器，以TIMx->CCRx方式可访问该寄存器，设置新的比较值，控制占空比
+//以宏封装后，使用这种形式：COLOR_TIMx->COLOR_GREEN_CCRx ，可访问该通道的比较寄存器
+#define  COLOR_GREEN_CCRx                       CCR2
+
+/************蓝灯***************/
+#define COLOR_BLUE_PIN                  GPIO_Pin_12                 
+#define COLOR_BLUE_GPIO_PORT            GPIOH                       
+#define COLOR_BLUE_PINSOURCE						GPIO_PinSource12
+#define COLOR_BLUE_AF										GPIO_AF_TIM5
+
+#define   COLOR_BLUE_TIM_OCxInit              TIM_OC3Init            //通道初始化函数
+#define   COLOR_BLUE_TIM_OCxPreloadConfig    TIM_OC3PreloadConfig  //通道重载配置函数
+
+//通道比较寄存器，以TIMx->CCRx方式可访问该寄存器，设置新的比较值，控制占空比
+//以宏封装后，使用这种形式：COLOR_TIMx->COLOR_BLUE_CCRx ，可访问该通道的比较寄存器
+#define   COLOR_BLUE_CCRx                      CCR3
 
 
-
-/*定时器*/
-
-#define COLOR_TIM           		TIM5
-#define COLOR_TIM_CLK       		RCC_APB1Periph_TIM5
-
-#define COLOR_LED1_CCRx								CCR1
-#define COLOR_LED2_CCRx								CCR2
-#define COLOR_LED3_CCRx								CCR3
-
-#define COLOR_LED1_TIM_CHANNEL				TIM_Channel_1
-#define COLOR_LED2_TIM_CHANNEL				TIM_Channel_2
-#define COLOR_LED3_TIM_CHANNEL				TIM_Channel_3
-
-#define COLOR_TIM_IRQn					TIM5_IRQn
-#define COLOR_TIM_IRQHandler 	TIM5_IRQHandler
 /************************************************************/
-
-
-/** 控制LED灯亮灭的宏，
-	* LED低电平亮，设置ON=0，OFF=1
-	* 若LED高电平亮，把宏设置成ON=1 ，OFF=0 即可
-	*/
-#define ON  0
-#define OFF 1
-
-/* 带参宏，可以像内联函数一样使用 */
-		
-//LED 4是普通IO口					
-#define LED4(a)	if (a)	\
-					GPIO_SetBits(LED4_GPIO_PORT,LED4_PIN);\
-					else		\
-					GPIO_ResetBits(LED4_GPIO_PORT,LED4_PIN)
-
-
-/* 直接操作寄存器的方法控制IO */
-#define	digitalHi(p,i)			{p->BSRRL=i;}			  //设置为高电平		
-#define digitalLo(p,i)			{p->BSRRH=i;}				//输出低电平
-#define digitalToggle(p,i)		{p->ODR ^=i;}			//输出反转状态
-
-/* 定义控制IO的宏 */
-#define LED4_TOGGLE		digitalToggle(LED4_GPIO_PORT,LED4_PIN)
-#define LED4_OFF				digitalHi(LED4_GPIO_PORT,LED4_PIN)
-#define LED4_ON				digitalLo(LED4_GPIO_PORT,LED4_PIN)
-
 
 /* RGB颜色值 24位*/
 #define COLOR_WHITE          0xFFFFFF

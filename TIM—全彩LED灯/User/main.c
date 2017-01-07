@@ -64,9 +64,7 @@ int main(void)
 		printf("\r\n 随机颜色值：0x%06x",random_color&0xFFFFFF);
 		/*显示随机颜色*/
 		SetRGBColor(random_color&0xFFFFFF); 
-		Delay(0x5FFFFFF); 
-
-
+		Delay(0x2FFFFFF); 
 
   }
 
