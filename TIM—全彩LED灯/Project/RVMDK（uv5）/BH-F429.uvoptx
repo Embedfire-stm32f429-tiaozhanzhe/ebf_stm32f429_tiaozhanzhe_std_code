@@ -191,9 +191,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>56</LineNumber>
+          <LineNumber>39</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225650</Address>
+          <Address>134225612</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -202,23 +202,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>G:\GIT_OSC\STM32_develop\F429-V2渚嬬▼\develop\1-鍥轰欢搴撲緥绋?TIM鈥斿叏褰㎜ED鐏?Project\User\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\COLOR_LED\../../User/main.c\56</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>57</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134225656</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>G:\GIT_OSC\STM32_develop\F429-V2渚嬬▼\develop\1-鍥轰欢搴撲緥绋?TIM鈥斿叏褰㎜ED鐏?Project\User\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\COLOR_LED\../../User/main.c\57</Expression>
+          <Expression>\\COLOR_LED\../../User/main.c\39</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -253,12 +237,6 @@
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
-      <SystemViewers>
-        <Entry>
-          <Name>System Viewer\TIM5</Name>
-          <WinId>35903</WinId>
-        </Entry>
-      </SystemViewers>
     </TargetOption>
   </Target>
 
