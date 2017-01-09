@@ -27,7 +27,8 @@
 int main(void) 
 {
   Debug_USART_Config();
-	
+	printf("\r\n这是一个定时器输入捕获例程\r\n");
+
   /* 初始化高级控制定时器输入捕获以及通用定时器输出PWM */
 	TIMx_Configuration();
   
