@@ -20,14 +20,15 @@
 
 /* 波形数据 ---------------------------------------------------------*/
 const uint16_t Sine12bit[32] = {
-	2448,2832,3186,3496,3751,3940,4057,4095,4057,3940,
-	3751,3496,3186,2832,2448,2048,1648,1264,910,600,345,
-	156,39,0,39,156,345,600,910,1264,1648,2048
+	2048	, 2460	, 2856	, 3218	, 3532	, 3786	, 3969	, 4072	,
+	4093	, 4031	, 3887	, 3668	, 3382	, 3042	,	2661	, 2255	, 
+	1841	, 1435	, 1054	, 714		, 428		, 209		, 65		, 3			,
+	24		, 127		, 310		, 564		, 878		, 1240	, 1636	, 2048
+
 };
 
 uint32_t DualSine12bit[32];
 
-DAC_InitTypeDef  DAC_InitStructure;
 
 /**
   * @brief  使能DAC的时钟，初始化GPIO
@@ -37,8 +38,7 @@ DAC_InitTypeDef  DAC_InitStructure;
 static void DAC_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-//经测试DAC_InitStructure必须为全局变量或静态变量
-//	DAC_InitTypeDef  DAC_InitStructure;
+	DAC_InitTypeDef  DAC_InitStructure;
 
   /* 使能GPIOA时钟 */
   RCC_AHB1PeriphClockCmd(DAC_CH1_GPIO_CLK|DAC_CH2_GPIO_CLK, ENABLE);	
@@ -50,6 +50,8 @@ static void DAC_Config(void)
   GPIO_InitStructure.GPIO_Pin =  DAC_CH1_GPIO_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;  
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_Init(DAC_CH1_GPIO_PORT, &GPIO_InitStructure);
 	
   GPIO_InitStructure.GPIO_Pin =  DAC_CH2_GPIO_PIN;
@@ -59,6 +61,8 @@ static void DAC_Config(void)
   DAC_InitStructure.DAC_Trigger = DAC_TRIGGER;						//使用TIM2作为触发源
   DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;	//不使用波形发生器
   DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;	//不使用DAC输出缓冲
+	//三角波振幅（本实验没有用到，可配置成任意值，但本结构体成员不能为空）
+	DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_TriangleAmplitude_4095;
   DAC_Init(DAC_CH1_CHANNEL, &DAC_InitStructure);
 
   /* 配置DAC 通道2 */
@@ -154,14 +158,14 @@ void DAC_Mode_Init(void)
 
 	DAC_Config();
 	DAC_TIM_Config();
-	DAC_DMA_Config();
 	
 	/* 填充正弦波形数据，双通道右对齐*/
   for (Idx = 0; Idx < 32; Idx++)
   {
     DualSine12bit[Idx] = (Sine12bit[Idx] << 16) + (Sine12bit[Idx]);
   }
-
+	
+	DAC_DMA_Config();
 }
 
 
