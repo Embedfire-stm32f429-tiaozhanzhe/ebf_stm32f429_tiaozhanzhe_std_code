@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2015-xx-xx
-  * @brief   串口接发测试，串口接收到数据后马上回传。
+  * @brief   ADC例程
   ******************************************************************************
   * @attention
   *
@@ -17,7 +17,7 @@
   
 #include "stm32f4xx.h"
 #include "./usart/bsp_debug_usart.h"
-#include "bsp_adc.h"
+#include "./adc/bsp_adc.h"
 
 
 // ADC1转换的电压值通过MDA方式传到SRAM

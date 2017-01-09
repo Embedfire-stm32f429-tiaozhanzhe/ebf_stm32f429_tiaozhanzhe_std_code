@@ -1,4 +1,20 @@
-#include "bsp_adc.h"
+/**
+  ******************************************************************************
+  * @file    bsp_bsp_adc.c
+  * @author  fire
+  * @version V1.0
+  * @date    2015-xx-xx
+  * @brief   adc驱动
+  ******************************************************************************
+  * @attention
+  *
+  * 实验平台:秉火  STM32 F429 开发板  
+  * 论坛    :http://www.firebbs.cn
+  * 淘宝    :https://fire-stm32.taobao.com
+  *
+  ******************************************************************************
+  */ 
+#include "./adc/bsp_adc.h"
 
 static void Rheostat_ADC_GPIO_Config(void)
 {
@@ -34,6 +50,7 @@ static void Rheostat_ADC_Mode_Config(void)
   ADC_CommonInit(&ADC_CommonInitStructure);
 	
   // -------------------ADC Init 结构体 参数 初始化--------------------------
+	ADC_StructInit(&ADC_InitStructure);
   // ADC 分辨率
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
   // 禁止扫描模式，多通道采集才需要	
@@ -42,8 +59,8 @@ static void Rheostat_ADC_Mode_Config(void)
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE; 
   //禁止外部边沿触发
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-  //使用软件触发，外部触发不用配置，注释掉即可
-  //ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
+  //外部触发通道，本例子使用软件触发，此值随便赋值即可
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   //数据右对齐	
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   //转换通道 1个

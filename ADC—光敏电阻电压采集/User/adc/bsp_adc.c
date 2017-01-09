@@ -103,6 +103,7 @@ static void Rheostat_ADC_Mode_Config(void)
   ADC_CommonInit(&ADC_CommonInitStructure);
 	
   // -------------------ADC Init 结构体 参数 初始化--------------------------
+	ADC_StructInit(&ADC_InitStructure);
   // ADC 分辨率
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
   // 禁止扫描模式，多通道采集才需要	
@@ -111,8 +112,8 @@ static void Rheostat_ADC_Mode_Config(void)
   ADC_InitStructure.ADC_ContinuousConvMode = ENABLE; 
   //禁止外部边沿触发
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-  //使用软件触发，外部触发不用配置，注释掉即可
-  //ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
+  //外部触发通道，本例子使用软件触发，此值随便赋值即可
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC1;
   //数据右对齐	
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   //转换通道 1个

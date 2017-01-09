@@ -43,7 +43,7 @@ int main(void)
 				DMA直接改变ADC_ConvertedValue的值*/
     Rheostat_Init();
   
-    printf("\r\n ----这是一个ADC实验(DMA传输)----\r\n");
+    printf("\r\n ----这是一个光敏电阻电压采集实验(DMA传输)----\r\n");
     
     while (1)
     {
