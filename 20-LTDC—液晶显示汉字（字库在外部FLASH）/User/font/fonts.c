@@ -1017,8 +1017,8 @@ int GetGBKCode_from_EXFlash( uint8_t * pBuffer, uint16_t c)
     Low8bit= c & 0x00FF;  /* 取低8位数据 */		
 	  	
 		/*GB2312 公式*/
-    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
-		SPI_FLASH_BufferRead(pBuffer,GBKCODE_START_ADDRESS+pos,24*24/8); //读取字库数据  
+    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8;
+		SPI_FLASH_BufferRead(pBuffer,GBKCODE_START_ADDRESS+pos,macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8); //读取字库数据  
 //	  printf ( "%02x %02x %02x %02x\n", pBuffer[0],pBuffer[1],pBuffer[2],pBuffer[3]);
 	
 		return 0;  
@@ -1053,7 +1053,7 @@ int GetGBKCode_from_sd ( uint8_t * pBuffer, uint16_t c)
     High8bit= c >> 8;     /* 取高8位数据 */
     Low8bit= c & 0x00FF;  /* 取低8位数据 */
 		
-    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
+    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8;
 	
 		/*第一次使用，挂载文件系统，初始化sd*/
 		if(everRead == 0)
@@ -1068,7 +1068,7 @@ int GetGBKCode_from_sd ( uint8_t * pBuffer, uint16_t c)
     if ( res_sd == FR_OK ) 
     {
         f_lseek (&fnew, pos);		//指针偏移
-        res_sd = f_read( &fnew, pBuffer, 24*24/8, &br );		 //24*24大小的汉字 其字模 占用24*24/8个字节
+        res_sd = f_read( &fnew, pBuffer, macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8, &br );		 //24*24大小的汉字 其字模 占用24*24/8个字节
         
         f_close(&fnew);
         

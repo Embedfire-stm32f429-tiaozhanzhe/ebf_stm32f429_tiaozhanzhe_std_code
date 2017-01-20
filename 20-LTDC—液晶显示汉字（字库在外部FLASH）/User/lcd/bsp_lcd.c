@@ -2406,7 +2406,7 @@ void LCD_DisplayStringLine(uint16_t Line, uint8_t *ptr)
 void LCD_DispChar_CH ( uint16_t usX, uint16_t usY, uint16_t usChar)
 {
 	uint8_t ucPage, ucColumn;
-	uint8_t ucBuffer [ 24*24/8 ];	
+	uint8_t ucBuffer [ macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8 ];	
 
   uint32_t usTemp; 	
 	
