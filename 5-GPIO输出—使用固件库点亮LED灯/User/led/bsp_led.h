@@ -44,6 +44,11 @@
 					GPIO_SetBits(LED3_GPIO_PORT,LED3_PIN);\
 					else		\
 					GPIO_ResetBits(LED3_GPIO_PORT,LED3_PIN)
+					
+#define LED4(a)	if (a)	\
+					GPIO_SetBits(LED4_GPIO_PORT,LED4_PIN);\
+					else		\
+					GPIO_ResetBits(LED4_GPIO_PORT,LED4_PIN)
 
 
 /* 直接操作寄存器的方法控制IO */

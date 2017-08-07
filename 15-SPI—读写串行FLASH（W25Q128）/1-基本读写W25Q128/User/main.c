@@ -67,7 +67,7 @@ int main(void)
 	SPI_FLASH_Init();
 	
 	/* ªÒ»° Flash Device ID */
-	DeviceID = SPI_FLASH_ReadDeviceID();
+//	DeviceID = SPI_FLASH_ReadDeviceID();
 	
 	Delay( 200 );
 	
