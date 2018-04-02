@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板 
+  * 实验平台:野火  STM32 F429 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -127,7 +127,8 @@ int main(void)
   while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)==0);
   while(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)==1); 
 
-    
+  printf("\r\n 正在进行整片擦除，时间很长，请耐心等候...\r\n");
+  SPI_FLASH_BulkErase();   
   //烧录数据到flash的非文件系统区域    
   res = burn_file_sd2flash(burn_data,AUX_MAX_NUM); 
   

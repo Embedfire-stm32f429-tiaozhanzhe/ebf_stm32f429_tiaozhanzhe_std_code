@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板  
+  * 实验平台:野火  STM32 F429 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -40,7 +40,7 @@ int main(void)
   /* 初始化串口 */
   Debug_USART_Config();
   
-  printf("\r\n 秉火STM32F429 SDRAM 读写测试例程\r\n");
+  printf("\r\n 野火STM32F429 SDRAM 读写测试例程\r\n");
   
   /*初始化SDRAM模块*/
   SDRAM_Init();
@@ -49,7 +49,7 @@ int main(void)
 	my_mem_init(SRAMEX);		//初始化外部内存池
 
 	 
-	printf ( "\r\n秉火内存管理\r\n" );
+	printf ( "\r\n野火内存管理\r\n" );
 
 	 
 	printf ( "\r\n分配内存\r\n" );

@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火 STM32  F429开发板 
+  * 实验平台:野火 STM32  F429开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -37,7 +37,7 @@ int main(void)
 	LED_GPIO_Config();	
 	
   Debug_USART_Config();    
-  printf("\r\n秉火STM3F429 触摸画板测试例程\r\n");
+  printf("\r\n野火STM3F429 触摸画板测试例程\r\n");
 
 //	LED_BLUE;
 	/* 初始化触摸屏 */

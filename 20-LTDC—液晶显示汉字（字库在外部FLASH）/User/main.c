@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板
+  * 实验平台:野火  STM32 F429 开发板
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -93,7 +93,7 @@ void LCD_Test(void)
 	/*这个函数只对英文字体起作用*/
   LCD_SetFont(&Font16x24); 	
 
- 	LCD_DisplayStringLine_EN_CH(LINE(1),(uint8_t* )"秉火5.0英寸液晶屏参数，");
+ 	LCD_DisplayStringLine_EN_CH(LINE(1),(uint8_t* )"野火5.0英寸液晶屏参数，");
 	LCD_DisplayStringLine_EN_CH(LINE(2),(uint8_t* )"分辨率:800x480 像素");
   LCD_DisplayStringLine_EN_CH(LINE(3),(uint8_t* )"触摸屏:5点电容触摸屏");
   LCD_DisplayStringLine_EN_CH(LINE(4),(uint8_t* )"使用STM32-LTDC直接驱动,无需外部液晶驱动器");

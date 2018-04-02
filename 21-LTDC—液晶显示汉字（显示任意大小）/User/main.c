@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板
+  * 实验平台:野火  STM32 F429 开发板
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -90,10 +90,10 @@ void LCD_Test(void)
 	/*这个函数只对英文字体起作用*/
   LCD_SetFont(&Font16x24); 	
 
-	LCD_DisplayStringLineEx(0,5,16,16,(uint8_t* )"秉火F429 16*16 ",0);
- 	LCD_DisplayStringLine_EN_CH(LINE(1),(uint8_t* )"秉火F429 24*24 ");
-	LCD_DisplayStringLineEx(0,50,32,32,(uint8_t* )"秉火F429 32*32 ",0);
-	LCD_DisplayStringLineEx(0,82,48,48,(uint8_t* )"秉火F429 48*48 ",0);
+	LCD_DisplayStringLineEx(0,5,16,16,(uint8_t* )"野火F429 16*16 ",0);
+ 	LCD_DisplayStringLine_EN_CH(LINE(1),(uint8_t* )"野火F429 24*24 ");
+	LCD_DisplayStringLineEx(0,50,32,32,(uint8_t* )"野火F429 32*32 ",0);
+	LCD_DisplayStringLineEx(0,82,48,48,(uint8_t* )"野火F429 48*48 ",0);
 
 	#if 1
 	/*使用c标准库把变量转化成字符串*/
