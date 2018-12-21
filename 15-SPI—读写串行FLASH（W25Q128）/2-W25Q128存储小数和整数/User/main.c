@@ -66,11 +66,11 @@ int main(void)
 	printf("\r\nFlashID is 0x%X,  Manufacturer Device ID is 0x%X\r\n", FlashID, DeviceID);
 	
 	/* 检验 SPI Flash ID */
-	if (FlashID == sFLASH_ID) 
+	if (FlashID == sFLASH_ID || FlashID == sFLASH_ID2) 
 	{	
 		LED_GREEN;
 		
-		printf("\r\n检测到SPI FLASH W25Q128 !\r\n");
+		printf("\r\n检测到SPI FLASH  !\r\n");
 		
 		/*读取数据标志位*/
     SPI_FLASH_BufferRead(&cal_flag, SPI_FLASH_PageSize*0, 1);
@@ -130,10 +130,12 @@ int main(void)
 	else
 	{    
 		LED_RED;
-		printf("\r\n获取不到 W25Q128 ID!\n\r");
+		printf("\r\n获取不到 FLASH ID!\n\r");
 	}
-	
-	SPI_Flash_PowerDown();  
+
+//调用以下函数flash会进入低功耗模式，
+//需要调用	SPI_FLASH_ReadDeviceID函数唤醒
+//	SPI_Flash_PowerDown();  
 	while(1);  
 }
 
