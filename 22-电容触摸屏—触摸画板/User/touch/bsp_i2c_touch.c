@@ -225,7 +225,7 @@ void I2C_ResetChip(void)
   * @param  нч
   * @retval нч
   */
-static void I2C_Mode_Config(void)
+void I2C_Mode_Config(void)
 {
   I2C_InitTypeDef  I2C_InitStructure; 
 
