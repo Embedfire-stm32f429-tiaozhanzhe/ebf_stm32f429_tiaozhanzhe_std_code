@@ -101,12 +101,12 @@ int8_t SPI_FLASH_Init(void)
 
 int8_t GET_SPIFLASH_STATE(void)
 {
-	if(sFLASH_ID == SPI_FLASH_ReadID())			/*检测FLASH是否正常工作*/
+	if(sFLASH_ID == SPI_FLASH_ReadID() || sFLASH_ID2 == SPI_FLASH_ReadID())			/*检测FLASH是否正常工作*/
 	{    
 		return 0;
 	}else
 	{    
-    FLASH_ERROR(" No W25Q64 !");
+    FLASH_ERROR(" No SPI FLASH !");
 		return -1;
 	}
 }
