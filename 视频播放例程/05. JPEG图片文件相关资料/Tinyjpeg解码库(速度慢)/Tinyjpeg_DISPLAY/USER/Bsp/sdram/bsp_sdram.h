@@ -156,6 +156,12 @@
 #define FMC_A11_PINSOURCE        GPIO_PinSource1
 #define FMC_A11_AF               GPIO_AF_FMC
 
+#define FMC_A12_GPIO_PORT        GPIOG
+#define FMC_A12_GPIO_CLK         RCC_AHB1Periph_GPIOG
+#define FMC_A12_GPIO_PIN         GPIO_Pin_2
+#define FMC_A12_PINSOURCE        GPIO_PinSource2
+#define FMC_A12_AF               GPIO_AF_FMC
+
 /*数据信号线*/
 #define FMC_D0_GPIO_PORT        GPIOD
 #define FMC_D0_GPIO_CLK         RCC_AHB1Periph_GPIOD

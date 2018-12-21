@@ -45,8 +45,8 @@ static void SDRAM_GPIO_Config(void)
   RCC_AHB1PeriphClockCmd(FMC_A0_GPIO_CLK | FMC_A1_GPIO_CLK | FMC_A2_GPIO_CLK | 
                          FMC_A3_GPIO_CLK | FMC_A4_GPIO_CLK | FMC_A5_GPIO_CLK |
                          FMC_A6_GPIO_CLK | FMC_A7_GPIO_CLK | FMC_A8_GPIO_CLK |
-                         FMC_A9_GPIO_CLK | FMC_A10_GPIO_CLK| FMC_A11_GPIO_CLK| 
-                         FMC_A12_GPIO_CLK| FMC_BA0_GPIO_CLK| FMC_BA1_GPIO_CLK|
+                         FMC_A9_GPIO_CLK | FMC_A10_GPIO_CLK| FMC_A11_GPIO_CLK|FMC_A12_GPIO_CLK|   
+                         FMC_BA0_GPIO_CLK| FMC_BA1_GPIO_CLK|
                          /*数据信号线*/
                          FMC_D0_GPIO_CLK | FMC_D1_GPIO_CLK | FMC_D2_GPIO_CLK | 
                          FMC_D3_GPIO_CLK | FMC_D4_GPIO_CLK | FMC_D5_GPIO_CLK |
@@ -123,7 +123,7 @@ static void SDRAM_GPIO_Config(void)
   GPIO_InitStructure.GPIO_Pin = FMC_A12_GPIO_PIN; 
   GPIO_Init(FMC_A12_GPIO_PORT, &GPIO_InitStructure);
   GPIO_PinAFConfig(FMC_A12_GPIO_PORT, FMC_A12_PINSOURCE , FMC_A12_AF);
-  
+ 
   /*BA地址信号线*/
   GPIO_InitStructure.GPIO_Pin = FMC_BA0_GPIO_PIN; 
   GPIO_Init(FMC_BA0_GPIO_PORT, &GPIO_InitStructure);

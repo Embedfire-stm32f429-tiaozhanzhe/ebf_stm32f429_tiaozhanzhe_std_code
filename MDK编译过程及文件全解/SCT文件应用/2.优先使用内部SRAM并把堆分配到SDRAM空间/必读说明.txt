@@ -62,7 +62,7 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
 
 【*】 引脚分配
 
-SDRAM （IS42S16400J8M 字节）：
+SDRAM （W9825G6 32M 字节）：
 SDRAM芯片的接口与STM32的FMC相连。
 		/*控制信号线*/
 		CS	<--->PH6
@@ -77,7 +77,7 @@ SDRAM芯片的接口与STM32的FMC相连。
 		UDQM<--->PE1
 		LDQM<--->PE0
 		
-地址和数据信号线省略，本连接的SDRAM基地址为 (0xD0000000)，结束地址为(0xD0800000),大小为8M字节
+地址和数据信号线省略，本连接的SDRAM基地址为 (0xD0000000)，结束地址为(0xD2000000),大小为32M字节
 
 
 串口(TTL-USB TO USART)：
