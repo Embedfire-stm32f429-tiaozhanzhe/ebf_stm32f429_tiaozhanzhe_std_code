@@ -36,7 +36,7 @@ static void SDRAM_delay(__IO uint32_t nCount)
   * @retval 无
   */
 static void SDRAM_GPIO_Config(void)
-{		
+{   
   GPIO_InitTypeDef GPIO_InitStructure;
   
   /* 使能SDRAM相关的GPIO时钟 */
@@ -46,7 +46,7 @@ static void SDRAM_GPIO_Config(void)
                          FMC_A3_GPIO_CLK | FMC_A4_GPIO_CLK | FMC_A5_GPIO_CLK |
                          FMC_A6_GPIO_CLK | FMC_A7_GPIO_CLK | FMC_A8_GPIO_CLK |
                          FMC_A9_GPIO_CLK | FMC_A10_GPIO_CLK| FMC_A11_GPIO_CLK| 
-												 FMC_BA0_GPIO_CLK| FMC_BA1_GPIO_CLK|
+                         FMC_A12_GPIO_CLK| FMC_BA0_GPIO_CLK| FMC_BA1_GPIO_CLK|
                          /*数据信号线*/
                          FMC_D0_GPIO_CLK | FMC_D1_GPIO_CLK | FMC_D2_GPIO_CLK | 
                          FMC_D3_GPIO_CLK | FMC_D4_GPIO_CLK | FMC_D5_GPIO_CLK |
@@ -119,9 +119,13 @@ static void SDRAM_GPIO_Config(void)
   GPIO_InitStructure.GPIO_Pin = FMC_A11_GPIO_PIN; 
   GPIO_Init(FMC_A11_GPIO_PORT, &GPIO_InitStructure);
   GPIO_PinAFConfig(FMC_A11_GPIO_PORT, FMC_A11_PINSOURCE , FMC_A11_AF);
-	
-	/*BA地址信号线*/
-	GPIO_InitStructure.GPIO_Pin = FMC_BA0_GPIO_PIN; 
+  
+  GPIO_InitStructure.GPIO_Pin = FMC_A12_GPIO_PIN; 
+  GPIO_Init(FMC_A12_GPIO_PORT, &GPIO_InitStructure);
+  GPIO_PinAFConfig(FMC_A12_GPIO_PORT, FMC_A12_PINSOURCE , FMC_A12_AF);
+  
+  /*BA地址信号线*/
+  GPIO_InitStructure.GPIO_Pin = FMC_BA0_GPIO_PIN; 
   GPIO_Init(FMC_BA0_GPIO_PORT, &GPIO_InitStructure);
   GPIO_PinAFConfig(FMC_BA0_GPIO_PORT, FMC_BA0_PINSOURCE , FMC_BA0_AF);
   
@@ -228,7 +232,7 @@ static void SDRAM_GPIO_Config(void)
   GPIO_Init(FMC_LDQM_GPIO_PORT, &GPIO_InitStructure);
   GPIO_PinAFConfig(FMC_LDQM_GPIO_PORT, FMC_LDQM_PINSOURCE , FMC_LDQM_AF);
 
-		
+    
 }
 
 /**
@@ -275,7 +279,7 @@ static void SDRAM_InitSequence(void)
   /* 配置命令：自动刷新 */   
   FMC_SDRAMCommandStructure.FMC_CommandMode = FMC_Command_Mode_AutoRefresh;
   FMC_SDRAMCommandStructure.FMC_CommandTarget = FMC_COMMAND_TARGET_BANK;
-  FMC_SDRAMCommandStructure.FMC_AutoRefreshNumber = 2;			//2个自动刷新命令
+  FMC_SDRAMCommandStructure.FMC_AutoRefreshNumber = 2;      //2个自动刷新命令
   FMC_SDRAMCommandStructure.FMC_ModeRegisterDefinition = 0;
   /* 检查SDRAM标志，等待至SDRAM空闲 */ 
   while(FMC_GetFlagStatus(FMC_BANK_SDRAM, FMC_FLAG_Busy) != RESET)
@@ -308,10 +312,10 @@ static void SDRAM_InitSequence(void)
 /* Step 8 --------------------------------------------------------------------*/
 
   /* 设置刷新计数器 */
-	/*刷新速率 = (COUNT + 1) x SDRAM 频率时钟
-		COUNT =（ SDRAM 刷新周期/行数) - 20*/
-  /* 64ms/4096=15.62us  (15.62 us x FSDCLK) - 20 =1386 */
-  FMC_SetRefreshCount(1386);
+  /*刷新速率 = (COUNT + 1) x SDRAM 频率时钟
+    COUNT =（ SDRAM 刷新周期/行数) - 20*/
+  /* 64ms/8192=7.813us  (7.813 us x FSDCLK) - 20 =683 */
+  FMC_SetRefreshCount(683);
   /* 发送上述命令*/
   while(FMC_GetFlagStatus(FMC_BANK_SDRAM, FMC_FLAG_Busy) != RESET)
   {
@@ -354,12 +358,12 @@ void SDRAM_Init(void)
   FMC_SDRAMTimingInitStructure.FMC_RCDDelay             = 2;
 
 /* FMC SDRAM 控制配置 */
-	/*选择存储区域*/
+  /*选择存储区域*/
   FMC_SDRAMInitStructure.FMC_Bank = FMC_BANK_SDRAM;
   /* 行地址线宽度: [7:0] */
-  FMC_SDRAMInitStructure.FMC_ColumnBitsNumber = FMC_ColumnBits_Number_8b;
+  FMC_SDRAMInitStructure.FMC_ColumnBitsNumber = FMC_ColumnBits_Number_9b;
   /* 列地址线宽度: [11:0] */
-  FMC_SDRAMInitStructure.FMC_RowBitsNumber = FMC_RowBits_Number_12b;
+  FMC_SDRAMInitStructure.FMC_RowBitsNumber = FMC_RowBits_Number_13b;
   /* 数据线宽度 */
   FMC_SDRAMInitStructure.FMC_SDMemoryDataWidth = SDRAM_MEMORY_WIDTH; 
   /* SDRAM内部bank数量*/
@@ -490,7 +494,7 @@ uint8_t SDRAM_Test(void)
       return 0;
     }
   }
-	
+  
   
   /*按16位格式读写数据，并检测*/
   
