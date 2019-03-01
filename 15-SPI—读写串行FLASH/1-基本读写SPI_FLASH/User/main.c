@@ -63,13 +63,11 @@ int main(void)
   
 	printf("\r\n这是一个串行SPI flash实验 \r\n");
 	
-	/* 16M串行flash W25Q128初始化 */
+	/* 32M串行flash W25Q128初始化 */
 	SPI_FLASH_Init();
 	
 	/* 获取 Flash Device ID */
 	DeviceID = SPI_FLASH_ReadDeviceID();
-	
-	Delay( 200 );
 	
 	/* 获取 SPI Flash ID */
 	FlashID = SPI_FLASH_ReadID();

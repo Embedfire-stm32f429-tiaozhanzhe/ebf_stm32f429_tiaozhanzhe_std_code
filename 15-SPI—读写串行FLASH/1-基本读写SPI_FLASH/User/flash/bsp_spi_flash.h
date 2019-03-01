@@ -21,7 +21,7 @@
 #define W25X_WriteDisable		      0x04 
 #define W25X_ReadStatusReg		    0x05 
 #define W25X_WriteStatusReg		  0x01 
-#define W25X_ReadData			        0x03 
+#define W25X_ReadData			        0x03
 #define W25X_FastReadData		      0x0B 
 #define W25X_FastReadDual		      0x3B 
 #define W25X_PageProgram		      0x02 
@@ -33,6 +33,8 @@
 #define W25X_DeviceID			        0xAB 
 #define W25X_ManufactDeviceID   	0x90 
 #define W25X_JedecDeviceID		    0x9F 
+#define W25X_Enter4ByteMode		    0xB7
+#define W25X_ReadStatusRegister3      0x15
 
 #define WIP_Flag                  0x01  /* Write In Progress (WIP) flag */
 #define Dummy_Byte                0xFF
@@ -97,7 +99,7 @@ u32 SPI_FLASH_ReadDeviceID(void);
 void SPI_FLASH_StartReadSequence(u32 ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
-
+void SPI_FLASH_Mode_Init(void);
 
 u8 SPI_FLASH_ReadByte(void);
 u8 SPI_FLASH_SendByte(u8 byte);
