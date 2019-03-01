@@ -16,7 +16,7 @@
 #define RHEOSTAT_ADC1_CLK         RCC_APB2Periph_ADC1
 #define RHEOSTAT_ADC_CHANNEL1     ADC_Channel_13
 /*=====================通道2 IO ======================*/
-// PA4 通过调帽接光敏电阻
+// PA4 通过杜邦线链接0V-3.3V测试
 // ADC IO宏定义
 #define RHEOSTAT_ADC_GPIO_PORT2    GPIOA
 #define RHEOSTAT_ADC_GPIO_PIN2     GPIO_Pin_4
@@ -37,7 +37,7 @@
 #define RHEOSTAT_ADC1_CLK         RCC_APB2Periph_ADC1
 #define RHEOSTAT_ADC_CHANNEL1     ADC_Channel_4
 /*=====================通道2 IO ======================*/
-// PA4 通过调帽接光敏电阻
+// PA4 通过杜邦线链接0V-3.3V测试
 // ADC IO宏定义
 #define RHEOSTAT_ADC_GPIO_PORT2    GPIOC
 #define RHEOSTAT_ADC_GPIO_PIN2     GPIO_Pin_3
