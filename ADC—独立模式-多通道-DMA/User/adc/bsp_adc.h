@@ -13,7 +13,7 @@
 #define RHEOSTAT_ADC_GPIO_CLK1     RCC_AHB1Periph_GPIOC
 #define RHEOSTAT_ADC_CHANNEL1      ADC_Channel_13
 /*=====================通道2 IO ======================*/
-// PA4 通过调帽接光敏电阻
+// PA4 悬空，可用杜邦线接3V3或者GND来实验
 // ADC IO宏定义
 #define RHEOSTAT_ADC_GPIO_PORT2    GPIOA
 #define RHEOSTAT_ADC_GPIO_PIN2     GPIO_Pin_4
