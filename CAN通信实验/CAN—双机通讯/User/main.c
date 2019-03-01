@@ -56,7 +56,7 @@ int main(void)
 	printf("\r\n 实验步骤：\r\n");
 
 	printf("\r\n 1.使用导线连接好两个CAN讯设备\r\n");
-	printf("\r\n 2.使用跳线帽连接好:5v --- C/4-5V \r\n");
+	printf("\r\n 2.使用跳线帽连接好:3V3 --- can/485_3v3 \r\n");
 	printf("\r\n 3.按下开发板的KEY1键，会使用CAN向外发送0-7的数据包，包的扩展ID为0x1314 \r\n");
 	printf("\r\n 4.若开发板的CAN接收到扩展ID为0x1314的数据包，会把数据以打印到串口。 \r\n");
 	printf("\r\n 5.本例中的can波特率为1MBps，为stm32的can最高速率。 \r\n");
