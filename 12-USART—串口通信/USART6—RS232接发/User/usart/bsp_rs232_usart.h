@@ -8,24 +8,24 @@
 
 //Òý½Å¶¨Òå
 /*******************************************************/
-#define RS232_USART                             USART2
-#define RS232_USART_CLK                         RCC_APB1Periph_USART2
+#define RS232_USART                             USART6
+#define RS232_USART_CLK                         RCC_APB2Periph_USART6
 
-#define RS232_USART_RX_GPIO_PORT                GPIOD
-#define RS232_USART_RX_GPIO_CLK                 RCC_AHB1Periph_GPIOD
-#define RS232_USART_RX_PIN                      GPIO_Pin_6
-#define RS232_USART_RX_AF                       GPIO_AF_USART2
-#define RS232_USART_RX_SOURCE                   GPIO_PinSource6
+#define RS232_USART_RX_GPIO_PORT                GPIOC
+#define RS232_USART_RX_GPIO_CLK                 RCC_AHB1Periph_GPIOC
+#define RS232_USART_RX_PIN                      GPIO_Pin_7
+#define RS232_USART_RX_AF                       GPIO_AF_USART6
+#define RS232_USART_RX_SOURCE                   GPIO_PinSource7
 
-#define RS232_USART_TX_GPIO_PORT                GPIOD
-#define RS232_USART_TX_GPIO_CLK                 RCC_AHB1Periph_GPIOD
-#define RS232_USART_TX_PIN                      GPIO_Pin_5
-#define RS232_USART_TX_AF                       GPIO_AF_USART2
-#define RS232_USART_TX_SOURCE                   GPIO_PinSource5
+#define RS232_USART_TX_GPIO_PORT                GPIOC
+#define RS232_USART_TX_GPIO_CLK                 RCC_AHB1Periph_GPIOC
+#define RS232_USART_TX_PIN                      GPIO_Pin_6
+#define RS232_USART_TX_AF                       GPIO_AF_USART6
+#define RS232_USART_TX_SOURCE                   GPIO_PinSource6
 
 
-#define RS232_USART_IRQHandler                   USART2_IRQHandler
-#define RS232_USART_IRQ                 					USART2_IRQn
+#define RS232_USART_IRQHandler                  USART6_IRQHandler
+#define RS232_USART_IRQ                 				USART6_IRQn
 /************************************************************/
 
 

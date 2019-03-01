@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2015-xx-xx
-  * @brief   使用串口2，重定向c库printf函数到usart端口，中断接收模式
+  * @brief   使用串口6，重定向c库printf函数到usart端口，中断接收模式
   ******************************************************************************
   * @attention
   *
@@ -53,7 +53,7 @@ void Debug_USART_Config(void)
   RCC_AHB1PeriphClockCmd( RS232_USART_RX_GPIO_CLK|RS232_USART_TX_GPIO_CLK, ENABLE);
 
   /* 使能 UART 时钟 */
-  RCC_APB1PeriphClockCmd(RS232_USART_CLK, ENABLE);
+  RCC_APB2PeriphClockCmd(RS232_USART_CLK, ENABLE);
   
   /* 连接 PXx 到 USARTx_Tx*/
   GPIO_PinAFConfig(RS232_USART_RX_GPIO_PORT,RS232_USART_RX_SOURCE, RS232_USART_RX_AF);
