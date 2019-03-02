@@ -53,15 +53,15 @@ static void BL8782_PDN_INIT(void)
   /*定义一个GPIO_InitTypeDef类型的结构体*/
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOG, ENABLE); 							   
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;	
+  RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOB, ENABLE); 							   
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;	
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz; 
-  GPIO_Init(GPIOG, &GPIO_InitStructure);	
+  GPIO_Init(GPIOB, &GPIO_InitStructure);	
   
-  GPIO_ResetBits(GPIOG,GPIO_Pin_9);  //关闭BL_8782wifi使能
+  GPIO_ResetBits(GPIOB,GPIO_Pin_13);  //禁用WiFi模块
 }
 /*
 *********************************************************************************************************

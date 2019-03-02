@@ -263,7 +263,7 @@
   * @param  None
   * @retval None
   */
-void SDIO_DeInit(void)
+ void SDIO_DeInit(void)
 {
   RCC_APB2PeriphResetCmd(RCC_APB2Periph_SDIO, ENABLE);
   RCC_APB2PeriphResetCmd(RCC_APB2Periph_SDIO, DISABLE);
