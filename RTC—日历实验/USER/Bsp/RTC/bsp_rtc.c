@@ -86,7 +86,7 @@ void RTC_TimeAndDate_Show(void)
 			RTC_DateStructure.RTC_Date,
 			RTC_DateStructure.RTC_WeekDay);
 
-			LCD_DisplayStringLineEx(10,50,48,48,(uint8_t *)LCDTemp,0); 
+			LCD_DisplayStringLineEx(10,50,40,40,(uint8_t *)LCDTemp,0); 
 			
 			// ´òÓ¡Ê±¼ä
       printf("The Time :  %0.2d:%0.2d:%0.2d \r\n\r\n", 
@@ -100,7 +100,7 @@ void RTC_TimeAndDate_Show(void)
 			RTC_TimeStructure.RTC_Minutes, 
 			RTC_TimeStructure.RTC_Seconds);
 
-			LCD_DisplayStringLineEx(10,100,48,48,(uint8_t *)LCDTemp,0);
+			LCD_DisplayStringLineEx(10,100,40,40,(uint8_t *)LCDTemp,0);
 			
       (void)RTC->DR;
     }
