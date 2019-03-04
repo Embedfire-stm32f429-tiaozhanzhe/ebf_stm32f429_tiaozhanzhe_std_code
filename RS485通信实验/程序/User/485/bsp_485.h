@@ -23,9 +23,9 @@
 #define _485_USART_TX_SOURCE                   GPIO_PinSource5
 
 
-#define _485_RE_GPIO_PORT												GPIOD
-#define _485_RE_GPIO_CLK												RCC_AHB1Periph_GPIOD
-#define _485_RE_PIN															GPIO_Pin_11
+#define _485_RE_GPIO_PORT												GPIOB
+#define _485_RE_GPIO_CLK												RCC_AHB1Periph_GPIOB
+#define _485_RE_PIN															GPIO_Pin_8
 
 #define _485_INT_IRQ                 						USART2_IRQn
 #define _485_IRQHandler                         USART2_IRQHandler
