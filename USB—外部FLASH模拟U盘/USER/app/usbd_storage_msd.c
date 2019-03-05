@@ -164,7 +164,7 @@ int8_t STORAGE_Init (uint8_t lun)
 int8_t STORAGE_GetCapacity (uint8_t lun, uint32_t *block_num, uint32_t *block_size)
 {
   *block_size =  4096;  
-  *block_num =  2560;  
+  *block_num =  4096;  
   return (0);
   
 }
@@ -202,7 +202,7 @@ int8_t STORAGE_Read (uint8_t lun,
                  uint32_t blk_addr,                       
                  uint16_t blk_len)
 {
-	blk_addr+=1536;
+	blk_addr+=4096;
   SPI_FLASH_BufferRead((uint8_t *)buf, blk_addr<<12, blk_len<<12);	
   return 0;
 }
@@ -219,7 +219,7 @@ int8_t STORAGE_Write (uint8_t lun,
                   uint32_t blk_addr,
                   uint16_t blk_len)
 {
-	blk_addr+=1536;
+	blk_addr+=4096;
   SPI_FLASH_SectorErase(blk_addr<<12);
 	SPI_FLASH_BufferWrite((uint8_t *)buf,blk_addr<< 12,blk_len<<12);	
   return (0);
