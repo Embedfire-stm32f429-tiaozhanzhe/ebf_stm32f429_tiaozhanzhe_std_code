@@ -108,7 +108,7 @@ DSTATUS TM_FATFS_FLASH_SPI_disk_initialize(void)
 DSTATUS TM_FATFS_FLASH_SPI_disk_status(void)
 {
 	FLASH_DEBUG_FUNC();
-	if(sFLASH_ID == SPI_FLASH_ReadID())			/*检测FLASH是否正常工作*/
+	if(sFLASH_ID == SPI_FLASH_ReadID() || sFLASH_ID2 == SPI_FLASH_ReadID())			/*检测FLASH是否正常工作*/
 	{
 		return TM_FATFS_FLASH_SPI_Stat &= ~STA_NOINIT;	/* Clear STA_NOINIT flag */
 	}else

@@ -17,6 +17,7 @@
 //#define  sFLASH_ID                        0xEF4015	   //W25Q16
 //#define  sFLASH_ID                        0XEF4017     //W25Q64
 #define  sFLASH_ID                          0XEF4019     //W25Q128
+#define  sFLASH_ID2                       0XEF4019     //W25Q256
 
 /* Private typedef -----------------------------------------------------------*/
 //#define SPI_FLASH_PageSize                4096
