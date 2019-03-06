@@ -360,9 +360,9 @@ void SDRAM_Init(void)
 /* FMC SDRAM 控制配置 */
   /*选择存储区域*/
   FMC_SDRAMInitStructure.FMC_Bank = FMC_BANK_SDRAM;
-  /* 行地址线宽度: [7:0] */
+  /* 行地址线宽度: [8:0] */
   FMC_SDRAMInitStructure.FMC_ColumnBitsNumber = FMC_ColumnBits_Number_9b;
-  /* 列地址线宽度: [11:0] */
+  /* 列地址线宽度: [12:0] */
   FMC_SDRAMInitStructure.FMC_RowBitsNumber = FMC_RowBits_Number_13b;
   /* 数据线宽度 */
   FMC_SDRAMInitStructure.FMC_SDMemoryDataWidth = SDRAM_MEMORY_WIDTH; 
