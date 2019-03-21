@@ -452,9 +452,6 @@ typedef struct
 
   uint16_t lcd_pixel_width; //液晶分辨率，宽
   uint16_t lcd_pixel_height;//液晶分辨率，高
-  
-  uint16_t m_palette_btn_width; //液晶分辨率，宽
-  uint16_t m_palette_btn_height;//液晶分辨率，高  
 
 }LCD_PARAM_TypeDef;
 
