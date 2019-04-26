@@ -11,7 +11,6 @@
 #define  sFLASH_ID                       0XEF4018     //W25Q128
 #define  sFLASH_ID2                       0XEF4019     //W25Q256
 
-
 //#define SPI_FLASH_PageSize            4096
 #define SPI_FLASH_PageSize              256
 #define SPI_FLASH_PerWritePageSize      256
@@ -22,7 +21,7 @@
 #define W25X_WriteDisable		      0x04 
 #define W25X_ReadStatusReg		    0x05 
 #define W25X_WriteStatusReg		  0x01 
-#define W25X_ReadData			        0x03 
+#define W25X_ReadData			        0x03
 #define W25X_FastReadData		      0x0B 
 #define W25X_FastReadDual		      0x3B 
 #define W25X_PageProgram		      0x02 
@@ -92,9 +91,9 @@
 void SPI_FLASH_Init(void);
 void SPI_FLASH_SectorErase(u32 SectorAddr);
 void SPI_FLASH_BulkErase(void);
-void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead);
+void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite);
+void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite);
+void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u32 NumByteToRead);
 u32 SPI_FLASH_ReadID(void);
 u32 SPI_FLASH_ReadDeviceID(void);
 void SPI_FLASH_StartReadSequence(u32 ReadAddr);

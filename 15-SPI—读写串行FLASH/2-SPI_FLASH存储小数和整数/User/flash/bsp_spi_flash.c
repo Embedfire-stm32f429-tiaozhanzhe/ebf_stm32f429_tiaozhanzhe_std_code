@@ -105,7 +105,7 @@ void SPI_FLASH_SectorErase(u32 SectorAddr)
   SPI_FLASH_CS_LOW();
   /* 发送扇区擦除指令*/
   SPI_FLASH_SendByte(W25X_SectorErase);
-	/*发送擦除扇区地址的高8位*/
+  /*发送擦除扇区地址的高8位*/
   SPI_FLASH_SendByte((SectorAddr & 0xFF000000) >> 24);
   /*发送擦除扇区地址的中前8位*/
   SPI_FLASH_SendByte((SectorAddr & 0xFF0000) >> 16);
@@ -151,7 +151,7 @@ void SPI_FLASH_BulkErase(void)
   * @param  NumByteToWrite，写入数据长度，必须小于等于SPI_FLASH_PerWritePageSize
   * @retval 无
   */
-void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite)
 {
   /* 发送FLASH写使能命令 */
   SPI_FLASH_WriteEnable();
@@ -160,6 +160,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   SPI_FLASH_CS_LOW();
   /* 写页写指令*/
   SPI_FLASH_SendByte(W25X_PageProgram);
+	
   /*发送写地址的高8位*/
   SPI_FLASH_SendByte((WriteAddr & 0xFF000000) >> 24);
   /*发送写地址的中前8位*/
@@ -199,7 +200,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   * @param  NumByteToWrite，写入数据长度
   * @retval 无
   */
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite)
 {
   u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 	
@@ -293,14 +294,14 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   * @param   NumByteToRead，读取数据长度
   * @retval 无
   */
-void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
+void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u32 NumByteToRead)
 {
   /* 选择FLASH: CS低电平 */
   SPI_FLASH_CS_LOW();
 
   /* 发送 读 指令 */
   SPI_FLASH_SendByte(W25X_ReadData);
-
+	
   /* 发送 读 地址高8位 */
   SPI_FLASH_SendByte((ReadAddr & 0xFF000000) >> 24);
   /* 发送 读 地址中前8位 */
@@ -600,7 +601,7 @@ void SPI_FLASH_Mode_Init(void)
 		SPI_FLASH_CS_HIGH();
 	}
 }
-
+	
 /**
   * @brief  等待超时回调函数
   * @param  None.

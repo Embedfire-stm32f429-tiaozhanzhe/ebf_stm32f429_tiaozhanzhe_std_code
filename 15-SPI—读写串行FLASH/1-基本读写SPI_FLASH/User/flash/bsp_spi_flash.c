@@ -151,7 +151,7 @@ void SPI_FLASH_BulkErase(void)
   * @param  NumByteToWrite，写入数据长度，必须小于等于SPI_FLASH_PerWritePageSize
   * @retval 无
   */
-void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite)
 {
   /* 发送FLASH写使能命令 */
   SPI_FLASH_WriteEnable();
@@ -200,7 +200,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   * @param  NumByteToWrite，写入数据长度
   * @retval 无
   */
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u32 NumByteToWrite)
 {
   u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 	
@@ -294,7 +294,7 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   * @param   NumByteToRead，读取数据长度
   * @retval 无
   */
-void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u16 NumByteToRead)
+void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, u32 NumByteToRead)
 {
   /* 选择FLASH: CS低电平 */
   SPI_FLASH_CS_LOW();
