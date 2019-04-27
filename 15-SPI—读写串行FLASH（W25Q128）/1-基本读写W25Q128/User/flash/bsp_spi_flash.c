@@ -86,6 +86,7 @@ void SPI_FLASH_Init(void)
   /* Ê¹ÄÜ FLASH_SPI  */
   SPI_Cmd(FLASH_SPI, ENABLE);
 
+  SPI_Flash_WAKEUP();
 }
 
  /**

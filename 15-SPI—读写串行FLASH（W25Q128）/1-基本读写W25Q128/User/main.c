@@ -112,7 +112,6 @@ int main(void)
 		printf("\r\n获取不到 W25Q128 ID!\n\r");
 	}
 	
-	SPI_Flash_PowerDown();  
 	while(1);  
 }
 
