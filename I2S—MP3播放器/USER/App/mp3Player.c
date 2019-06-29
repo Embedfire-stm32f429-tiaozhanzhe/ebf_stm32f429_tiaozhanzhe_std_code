@@ -22,6 +22,7 @@
 #include "ff.h" 
 #include "App/mp3Player.h"
 #include "mp3dec.h"
+#include "./key/bsp_key.h" 
 
 /* 推荐使用以下格式mp3文件：
  * 采样率：44100Hz
@@ -136,6 +137,17 @@ void mp3PlayerDemo(const char *mp3file)
 			bytes_left=bw;
 			continue;
 		}
+    
+    if (Key_Scan(KEY1_GPIO_PORT, KEY1_PIN) == KEY_ON)    // 设置为耳机输出
+    {
+      wm8978_CfgAudioPath(DAC_ON, EAR_LEFT_ON | EAR_RIGHT_ON);
+      printf(" 耳机输出\n");
+    }
+    else if (Key_Scan(KEY2_GPIO_PORT, KEY2_PIN) == KEY_ON)    // 设置为扬声器输出
+    {
+      wm8978_CfgAudioPath(DAC_ON, SPK_ON);
+      printf(" 扬声器输出\n");
+    }
 		
 		read_ptr += read_offset;					//偏移至同步字的位置
 		bytes_left -= read_offset;				//同步字之后的数据大小	
@@ -211,6 +223,8 @@ void mp3PlayerDemo(const char *mp3file)
 				printf(" \r\n Layer         %d", Mp3FrameInfo.layer);
 				printf(" \r\n Version       %d", Mp3FrameInfo.version);
 				printf(" \r\n OutputSamps   %d", Mp3FrameInfo.outputSamps);
+        printf(" \r\n 按KEY1切换为耳机输出");
+        printf(" \r\n 按KEY2切换为扬声器输出");
 				printf("\r\n");
 				//I2S_AudioFreq_Default = 2，正常的帧，每次都要改速率
 				if(mp3player.ucFreq >= I2S_AudioFreq_Default)	
