@@ -101,6 +101,8 @@
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
         <bEvRecOn>1</bEvRecOn>
+        <bSchkAxf>0</bSchkAxf>
+        <bTchkAxf>0</bTchkAxf>
         <nTsel>2</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
@@ -146,104 +148,7 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>343</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134222910</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\343</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>446</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134223296</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\446</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>444</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134223292</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\444</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>438</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134223284</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\438</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>433</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134223280</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\433</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>428</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134223276</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\F429\1-鍥轰欢搴撲緥绋?22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉?Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\428</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -294,8 +199,13 @@
       <pszMrule></pszMrule>
       <pSingCmds></pSingCmds>
       <pMultCmds></pMultCmds>
+      <pMisraNamep></pMisraNamep>
+      <pszMrulep></pszMrulep>
+      <pSingCmdsp></pSingCmdsp>
+      <pMultCmdsp></pMultCmdsp>
       <DebugDescription>
         <Enable>1</Enable>
+        <EnableFlashSeq>0</EnableFlashSeq>
         <EnableLog>0</EnableLog>
         <Protocol>2</Protocol>
         <DbgClock>5000000</DbgClock>

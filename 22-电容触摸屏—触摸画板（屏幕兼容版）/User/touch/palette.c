@@ -30,8 +30,8 @@ const COLOR_BLOCK_PARAM_TypeDef color_block_param[LCD_TYPE_NUM] =
   
   /* 7寸屏的色块大小 */
   {
-    .width = 40,
-    .height = 25,
+    .width = 90,
+    .height = 50,
   },
   
   /* 4.3寸屏的色块大小 */
