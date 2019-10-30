@@ -783,10 +783,10 @@ Output:
 		/*根据模式设置X2Y交换*/
 
     //不交换
-    //				config[GTP_ADDR_LENGTH+6] &= ~(X2Y_LOC);
+//		config[GTP_ADDR_LENGTH+6] &= ~(X2Y_LOC);
 
     //交换
-    config[GTP_ADDR_LENGTH+6] |= (X2Y_LOC);
+//    config[GTP_ADDR_LENGTH+6] |= (X2Y_LOC);
 
     //计算要写入checksum寄存器的值
     check_sum = 0;
@@ -801,7 +801,7 @@ Output:
         config[ cfg_num+GTP_ADDR_LENGTH] = (~(check_sum & 0xFF)) + 1; 	//checksum
         config[ cfg_num+GTP_ADDR_LENGTH+1] =  1; 						//refresh 配置更新标志
     }
-    else if(touchIC == GT5688) 
+    else if(touchIC == GT5688 || touchIC == GT917S) 
     {
       for (i = GTP_ADDR_LENGTH; i < (cfg_num+GTP_ADDR_LENGTH -3); i += 2) 
       {
@@ -901,7 +901,7 @@ int32_t GTP_Read_Version(void)
         return ret;
     }
 
-    if (buf[2] == '9')
+    if (buf[4] == '1')
     {				
 				//GT911芯片
 				if(buf[2] == '9' && buf[3] == '1' && buf[4] == '1')
@@ -913,7 +913,12 @@ int32_t GTP_Read_Version(void)
           cur_lcd = INCH_7;
         }
         //GT9157芯片
-        else if( buf[2] == '9' && buf[3] == '1' && buf[4] == '5' && buf[5] == '7')
+        else
+           GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+		}
+		else if (buf[4] == '5')
+		{
+			if( buf[2] == '9' && buf[3] == '1' && buf[4] == '5' && buf[5] == '7')
         {
           GTP_INFO("IC2 Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
 
@@ -925,7 +930,7 @@ int32_t GTP_Read_Version(void)
            GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
 
     }    
-    else if (buf[2] == '5')
+    else if (buf[4] == '8')
     {	
 				//GT5688芯片
 				if(buf[2] == '5' && buf[3] == '6' && buf[4] == '8' && buf[5] == '8')
@@ -940,13 +945,17 @@ int32_t GTP_Read_Version(void)
            GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
 
     }
-		else if(buf[5] == 'S')
+		else if(buf[4] == '7')
     {
 			  //GT917S芯片
          GTP_INFO("IC2 Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
 				
 				if(buf[2] == '9' && buf[3] == '1' && buf[4] == '7' && buf[5] == 'S')
-					touchIC = GT917S;      
+				{	
+					touchIC = GT917S; 
+					/* 设置当前的液晶屏类型 */
+          cur_lcd = INCH_5;	
+				}					
     }
     else 
        GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
