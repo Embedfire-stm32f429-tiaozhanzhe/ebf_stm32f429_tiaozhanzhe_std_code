@@ -16,7 +16,7 @@
   */
 
 #include "./touch/palette.h"
-#include "./touch/bsp_touch_gtxx.h"
+#include "./touch/gt9xx.h"
 #include "./lcd/bsp_lcd.h"
  
  
@@ -37,7 +37,7 @@ const COLOR_BLOCK_PARAM_TypeDef color_block_param[LCD_TYPE_NUM] =
   /* 4.3寸屏的色块大小 */
   {
     .width = 40,
-    .height = 25,
+    .height = 27,
   }
 };
 

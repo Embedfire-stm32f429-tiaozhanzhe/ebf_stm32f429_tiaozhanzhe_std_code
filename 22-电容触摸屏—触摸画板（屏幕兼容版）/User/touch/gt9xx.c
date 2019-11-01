@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "./touch/bsp_touch_gtxx.h"
+#include "./touch/gt9xx.h"
 #include "./touch/bsp_i2c_touch.h"
 #include "./lcd/bsp_lcd.h"
 #include "./touch/palette.h"
@@ -338,7 +338,6 @@ void GTP_IRQ_Disable(void)
 
     GTP_DEBUG_FUNC();
 
-    I2C_GTP_IRQDisable();
 }
 
 /**
@@ -350,7 +349,6 @@ void GTP_IRQ_Enable(void)
 {
     GTP_DEBUG_FUNC();
      
-	  I2C_GTP_IRQEnable();    
 }
 
 
@@ -1104,15 +1102,15 @@ static int32_t GT91xx_Config_Write_Proc(void)
   * @param 无
   * @retval 无
   */
-void GTP_IRQHandler(void)
-{
-	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
-	{
-		//LED2_TOGGLE;
-        GTP_TouchProcess();    
-		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
-	}  
-}
+//void GTP_IRQHandler(void)
+//{
+//	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
+//	{
+//		//LED2_TOGGLE;
+//        GTP_TouchProcess();    
+//		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
+//	}  
+//}
 
 /**
   * @brief  触屏检测函数，本函数作为emXGUI的定制检测函数，

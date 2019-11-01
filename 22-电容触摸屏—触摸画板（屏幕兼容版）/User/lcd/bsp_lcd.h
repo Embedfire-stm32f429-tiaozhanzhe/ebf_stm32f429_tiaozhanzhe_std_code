@@ -495,6 +495,7 @@ extern const LCD_PARAM_TypeDef lcd_param[];
 
 #define HFP  lcd_param[cur_lcd].hfp		//HSYNC前的无效像素
 #define VFP  lcd_param[cur_lcd].vfp		//VSYNC前的无效行数
+
 /**
   * @brief  LCD color
   */

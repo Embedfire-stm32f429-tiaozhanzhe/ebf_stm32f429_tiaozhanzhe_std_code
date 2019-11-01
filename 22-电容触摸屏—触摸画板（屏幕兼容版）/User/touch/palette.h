@@ -4,7 +4,6 @@
 #include "stm32f4xx.h"
 #include "./lcd/bsp_lcd.h"
  
-
 typedef struct
 {
    /* 不同的液晶使用不同的宽高 */

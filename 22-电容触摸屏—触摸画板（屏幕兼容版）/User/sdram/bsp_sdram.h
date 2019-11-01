@@ -6,7 +6,7 @@
 
 
 
-#define IS42S16400J_SIZE 0x800000  //400000*16bits = 0x800000  ，8M字节
+#define IS42S16400J_SIZE (32*1024*1024)  //32M字节，W9825G6
 
 
 /*SDRAM 的bank选择*/  
@@ -27,8 +27,8 @@
 /**
   * @brief  FMC SDRAM CAS Latency
   */  
-/* #define SDRAM_CAS_LATENCY   FMC_CAS_Latency_2  */
-#define SDRAM_CAS_LATENCY    FMC_CAS_Latency_3
+#define SDRAM_CAS_LATENCY   FMC_CAS_Latency_2  
+//#define SDRAM_CAS_LATENCY    FMC_CAS_Latency_3
 
 /**
   * @brief  FMC SDRAM SDCLK时钟分频因子
@@ -39,8 +39,8 @@
 /**
   * @brief  FMC SDRAM 突发读取特性
   */  
-#define SDRAM_READBURST    FMC_Read_Burst_Disable    /* Default configuration used with LCD */
-/* #define SDRAM_READBURST    FMC_Read_Burst_Enable  */
+//#define SDRAM_READBURST    FMC_Read_Burst_Disable    /* Default configuration used with LCD */
+#define SDRAM_READBURST    FMC_Read_Burst_Enable  
 
 /**
   * @brief  FMC SDRAM Bank Remap
@@ -81,7 +81,7 @@
   */  
 
   
-/*地址信号线*/  
+/*A行列地址信号线*/    
 #define FMC_A0_GPIO_PORT        GPIOF
 #define FMC_A0_GPIO_CLK         RCC_AHB1Periph_GPIOF
 #define FMC_A0_GPIO_PIN         GPIO_Pin_0
@@ -156,7 +156,26 @@
 #define FMC_A11_PINSOURCE        GPIO_PinSource1
 #define FMC_A11_AF               GPIO_AF_FMC
 
-/*数据信号线*/
+#define FMC_A12_GPIO_PORT        GPIOG
+#define FMC_A12_GPIO_CLK         RCC_AHB1Periph_GPIOG
+#define FMC_A12_GPIO_PIN         GPIO_Pin_2
+#define FMC_A12_PINSOURCE        GPIO_PinSource2
+#define FMC_A12_AF               GPIO_AF_FMC
+
+/*BA地址线*/
+#define FMC_BA0_GPIO_PORT        GPIOG
+#define FMC_BA0_GPIO_CLK         RCC_AHB1Periph_GPIOG
+#define FMC_BA0_GPIO_PIN         GPIO_Pin_4
+#define FMC_BA0_PINSOURCE        GPIO_PinSource4
+#define FMC_BA0_AF               GPIO_AF_FMC
+
+#define FMC_BA1_GPIO_PORT        GPIOG
+#define FMC_BA1_GPIO_CLK         RCC_AHB1Periph_GPIOG
+#define FMC_BA1_GPIO_PIN         GPIO_Pin_5
+#define FMC_BA1_PINSOURCE        GPIO_PinSource5
+#define FMC_BA1_AF               GPIO_AF_FMC
+
+/*DQ数据信号线*/
 #define FMC_D0_GPIO_PORT        GPIOD
 #define FMC_D0_GPIO_CLK         RCC_AHB1Periph_GPIOD
 #define FMC_D0_GPIO_PIN         GPIO_Pin_14
@@ -255,61 +274,51 @@
 
 
 /*控制信号线*/  
+/*CS片选*/
 #define FMC_CS_GPIO_PORT        GPIOH
 #define FMC_CS_GPIO_CLK         RCC_AHB1Periph_GPIOH
 #define FMC_CS_GPIO_PIN         GPIO_Pin_6
 #define FMC_CS_PINSOURCE        GPIO_PinSource6
 #define FMC_CS_AF               GPIO_AF_FMC
 
-#define FMC_BA0_GPIO_PORT        GPIOG
-#define FMC_BA0_GPIO_CLK         RCC_AHB1Periph_GPIOG
-#define FMC_BA0_GPIO_PIN         GPIO_Pin_4
-#define FMC_BA0_PINSOURCE        GPIO_PinSource4
-#define FMC_BA0_AF               GPIO_AF_FMC
-
-#define FMC_BA1_GPIO_PORT        GPIOG
-#define FMC_BA1_GPIO_CLK         RCC_AHB1Periph_GPIOG
-#define FMC_BA1_GPIO_PIN         GPIO_Pin_5
-#define FMC_BA1_PINSOURCE        GPIO_PinSource5
-#define FMC_BA1_AF               GPIO_AF_FMC
-
+/*WE写使能*/
 #define FMC_WE_GPIO_PORT        GPIOC
 #define FMC_WE_GPIO_CLK         RCC_AHB1Periph_GPIOC
 #define FMC_WE_GPIO_PIN         GPIO_Pin_0
 #define FMC_WE_PINSOURCE        GPIO_PinSource0
 #define FMC_WE_AF               GPIO_AF_FMC
-
+/*RAS行选通*/
 #define FMC_RAS_GPIO_PORT        GPIOF
 #define FMC_RAS_GPIO_CLK         RCC_AHB1Periph_GPIOF
 #define FMC_RAS_GPIO_PIN         GPIO_Pin_11
 #define FMC_RAS_PINSOURCE        GPIO_PinSource11
 #define FMC_RAS_AF               GPIO_AF_FMC
-
+/*CAS列选通*/
 #define FMC_CAS_GPIO_PORT        GPIOG
 #define FMC_CAS_GPIO_CLK         RCC_AHB1Periph_GPIOG
 #define FMC_CAS_GPIO_PIN         GPIO_Pin_15
 #define FMC_CAS_PINSOURCE        GPIO_PinSource15
 #define FMC_CAS_AF               GPIO_AF_FMC
-
+/*CLK同步时钟，存储区域2*/
 #define FMC_CLK_GPIO_PORT        GPIOG
 #define FMC_CLK_GPIO_CLK         RCC_AHB1Periph_GPIOG
 #define FMC_CLK_GPIO_PIN         GPIO_Pin_8
 #define FMC_CLK_PINSOURCE        GPIO_PinSource8
 #define FMC_CLK_AF               GPIO_AF_FMC
-
+/*CKE时钟使能，存储区域2*/
 #define FMC_CKE_GPIO_PORT        GPIOH
 #define FMC_CKE_GPIO_CLK         RCC_AHB1Periph_GPIOH
 #define FMC_CKE_GPIO_PIN         GPIO_Pin_7
 #define FMC_CKE_PINSOURCE        GPIO_PinSource7
 #define FMC_CKE_AF               GPIO_AF_FMC
 
-/*UDQM LDQM*/
+/*DQM1数据掩码*/
 #define FMC_UDQM_GPIO_PORT        GPIOE
 #define FMC_UDQM_GPIO_CLK         RCC_AHB1Periph_GPIOE
 #define FMC_UDQM_GPIO_PIN         GPIO_Pin_1
 #define FMC_UDQM_PINSOURCE        GPIO_PinSource1
 #define FMC_UDQM_AF               GPIO_AF_FMC
-
+/*DQM0数据掩码*/
 #define FMC_LDQM_GPIO_PORT        GPIOE
 #define FMC_LDQM_GPIO_CLK         RCC_AHB1Periph_GPIOE
 #define FMC_LDQM_GPIO_PIN         GPIO_Pin_0

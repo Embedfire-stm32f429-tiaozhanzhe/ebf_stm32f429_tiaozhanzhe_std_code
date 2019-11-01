@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板  
+  * 实验平台:野火  STM32 F429 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -1916,7 +1916,14 @@ static void LCD_GPIO_Config(void);
  * @}
  */
 
-/* 不同液晶屏的参数 */
+
+
+/**
+ * @brief  Initializes the LCD.
+ * @param  None
+ * @retval None
+ */
+
 const LCD_PARAM_TypeDef lcd_param[LCD_TYPE_NUM]={
 
   /* 5寸屏参数 */
@@ -1986,11 +1993,9 @@ const LCD_PARAM_TypeDef lcd_param[LCD_TYPE_NUM]={
 LCD_TypeDef cur_lcd = INCH_5;
 
 const uint8_t PIXEL_BPP[]={4,3,2,2,2,1,1,2};  
-/**
- * @brief  Initializes the LCD.
- * @param  None
- * @retval None
- */
+
+
+
 void LCD_Init(void)
 {
  LTDC_InitTypeDef       LTDC_InitStruct;
@@ -2100,11 +2105,11 @@ void LCD_LayerInit(void)
  Active high width         = LCD_PIXEL_WIDTH
  number of bytes per pixel = 2    (pixel_format : RGB565)
  */
- LTDC_Layer_InitStruct.LTDC_CFBLineLength = ((LCD_PIXEL_WIDTH * PIXEL_BPP[2]) + 3);
+ LTDC_Layer_InitStruct.LTDC_CFBLineLength = ((LCD_PIXEL_WIDTH * 2) + 3);
  /* the pitch is the increment from the start of one line of pixels to the
  start of the next line in bytes, then :
  Pitch = Active high width x number of bytes per pixel */
- LTDC_Layer_InitStruct.LTDC_CFBPitch = (LCD_PIXEL_WIDTH *  PIXEL_BPP[2]);
+ LTDC_Layer_InitStruct.LTDC_CFBPitch = (LCD_PIXEL_WIDTH * 2);
 
  /* Configure the number of lines */
  LTDC_Layer_InitStruct.LTDC_CFBLineNumber = LCD_PIXEL_HEIGHT;

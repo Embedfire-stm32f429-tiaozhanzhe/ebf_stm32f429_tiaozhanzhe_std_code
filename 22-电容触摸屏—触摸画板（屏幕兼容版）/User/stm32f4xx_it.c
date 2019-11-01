@@ -33,9 +33,9 @@
 #include "./usart/bsp_debug_usart.h"
 #include "./touch/bsp_i2c_touch.h"
 #include "./led/bsp_led.h"
-
+#include "./systick/bsp_SysTick.h"
+#include "./touch/gt9xx.h"
 extern void GTP_TouchProcess(void);
-
 /** @addtogroup STM32F429I_DISCOVERY_Examples
   * @{
   */
@@ -144,19 +144,22 @@ void PendSV_Handler(void)
   * @retval None
   */
 void SysTick_Handler(void)
-{}
+{
+
+	static uint8_t timecount=0;
+	if(timecount>=10)
+	{
+		timecount=0;
+		GTP_TouchProcess();
+	}
+	TimingDelay_Decrement();
+	timecount++;
+}
+
+
 
   
   
-//void GTP_IRQHandler(void)
-//{
-//	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
-//	{
-//		LED2_TOGGLE;
-//    GTP_TouchProcess();    
-//		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
-//	}  
-//}
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */

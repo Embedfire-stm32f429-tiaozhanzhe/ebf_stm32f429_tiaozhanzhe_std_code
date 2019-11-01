@@ -20,9 +20,9 @@
 #include "./usart/bsp_debug_usart.h"
 #include "./sdram/bsp_sdram.h"
 #include "./lcd/bsp_lcd.h"
-#include "./touch/bsp_touch_gtxx.h"
+#include "./touch/gt9xx.h"
 #include "./touch/palette.h"
-
+#include "./systick/bsp_SysTick.h"
 
 void Delay(__IO u32 nCount); 
 
@@ -42,9 +42,11 @@ int main(void)
 //	LED_BLUE;
 	/* ≥ı ºªØ¥•√˛∆¡ */
   GTP_Init_Panel(); 
-	
+		SysTick_Init();
 	/*≥ı ºªØ“∫æß∆¡*/
   LCD_Init();
+	
+
   LCD_LayerInit();
   LTDC_Cmd(ENABLE);
 	
