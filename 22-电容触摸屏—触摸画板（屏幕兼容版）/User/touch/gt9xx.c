@@ -128,7 +128,7 @@ uint8_t CTP_CFG_GT917S[] ={
 //                = {GTP_REG_CONFIG_DATA >> 8, GTP_REG_CONFIG_DATA & 0xff};
 
 /* 触摸IC类型默认为5寸屏的ic */
-TOUCH_IC touchIC = GT917S;		
+TOUCH_IC touchIC = GT9157;		
 
 const TOUCH_PARAM_TypeDef touch_param[4] = 
 {
