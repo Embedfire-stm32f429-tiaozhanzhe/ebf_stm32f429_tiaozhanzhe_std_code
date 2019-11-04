@@ -24,6 +24,7 @@
 #include "Bsp/systick/bsp_SysTick.h"
 #include "Bsp/wm8978/bsp_wm8978.h" 
 #include "App/mp3Player.h"
+#include "./key/bsp_key.h" 
 #include "ff.h" 
 
 /**
