@@ -38,19 +38,12 @@ int main(void)
 	// 如果用户想修改系统时钟，可自行编写程序修改	
 	// 重新设置系统时钟，这时候可以选择使用HSE还是HSI
 	
-	// 使用HSE，配置系统时钟为180M
-	HSE_SetSysClock(25, 360, 2, 7);
+	/*  注意 ：由于在 PLL 使能后主 PLL 配置参数便不可更改，而系统上电后会
+	 *  自动进行初始化，因此在对HES重新初始化之前，需要将system_stm32f4xx.c	  
+	 *  中的line506：SetSysClock();注释掉,否则HSE重新初始化之后不生效。
+	 */
 	
-	//系统时钟超频到216M爽一下，最高是216M，别往死里整
-  //HSE_SetSysClock(25, 432, 2, 9);
-	
-	// 使用HSI，配置系统时钟为180M
-	//HSI_SetSysClock(16, 360, 2, 7);
-	
-	// LED 端口初始化 
-	LED_GPIO_Config();
-	
-  // MCO GPIO  初始化
+	// MCO GPIO  初始化
   MCO1_GPIO_Config();
   MCO2_GPIO_Config();	
   
@@ -59,6 +52,19 @@ int main(void)
 	
 	// MCO2 输出SYSCLK
 	RCC_MCO2Config(RCC_MCO2Source_SYSCLK, RCC_MCO1Div_1);
+	
+	// 使用HSE，配置系统时钟为180M
+	//HSE_SetSysClock(25, 360, 2, 7);
+	
+	//系统时钟超频到216M爽一下，最高是216M，别往死里整
+  HSE_SetSysClock(25, 432, 2, 9);
+	
+	// 使用HSI，配置系统时钟为180M
+	//HSI_SetSysClock(16, 360, 2, 7);
+	
+	// LED 端口初始化 
+	LED_GPIO_Config();
+	
 
 	while (1)
 	{
