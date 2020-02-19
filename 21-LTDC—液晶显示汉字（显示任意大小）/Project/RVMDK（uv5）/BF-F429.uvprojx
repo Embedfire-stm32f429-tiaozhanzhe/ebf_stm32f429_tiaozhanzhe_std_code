@@ -698,6 +698,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\flash\bsp_spi_flash.c</FilePath>
             </File>
+            <File>
+              <FileName>resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\font\resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

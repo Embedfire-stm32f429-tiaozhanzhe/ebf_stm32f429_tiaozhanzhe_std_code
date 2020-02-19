@@ -718,6 +718,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\systick\bsp_SysTick.c</FilePath>
             </File>
+            <File>
+              <FileName>resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\font\resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

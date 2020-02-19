@@ -31,6 +31,7 @@
 #if GBKCODE_FLASH
 
 #include "./flash/bsp_spi_flash.h"
+#include "./font/resource_port.h"
 
 #else
 
@@ -1003,22 +1004,30 @@ int GetGBKCode_from_EXFlash( uint8_t * pBuffer, uint16_t c)
 { 
     unsigned char High8bit,Low8bit;
     unsigned int pos;
-	
+    CatalogTypeDef dir;
+
 		static uint8_t everRead=0;
+    static s32 gbk_start_address =0;
 		
-		/*第一次使用，初始化FLASH*/
+		/*第一次使用，初始化FLASH，并找到字库地址*/
 		if(everRead == 0)
 		{
 			SPI_FLASH_Init();
+			everRead = 1;
+      gbk_start_address = RES_GetInfo_AbsAddr(GBKCODE_FILE_NAME, &dir);    // 获取字库的地址
+      if (gbk_start_address == -1)
+      {
+        printf("没有找到字库,请使用刷外部FLASH程序（如何恢复出厂内容）工程将字库写入flash\n");
+      }
 		}
 	
 	  High8bit= c >> 8;     /* 取高8位数据 */
     Low8bit= c & 0x00FF;  /* 取低8位数据 */		
 	  	
 		/*GB2312 公式*/
-    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
-		SPI_FLASH_BufferRead(pBuffer,GBKCODE_START_ADDRESS+pos,24*24/8); //读取字库数据  
+    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8;
 
+		SPI_FLASH_BufferRead(pBuffer,gbk_start_address+pos,macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8); //读取字库数据  
 //	  printf ( "%02x %02x %02x %02x\n", pBuffer[0],pBuffer[1],pBuffer[2],pBuffer[3]);
 	
 		return 0;  
@@ -1053,12 +1062,14 @@ int GetGBKCode_from_sd ( uint8_t * pBuffer, uint16_t c)
     High8bit= c >> 8;     /* 取高8位数据 */
     Low8bit= c & 0x00FF;  /* 取低8位数据 */
 		
-    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
+    pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8;
 	
 		/*第一次使用，挂载文件系统，初始化sd*/
 		if(everRead == 0)
 		{
 			res_sd = f_mount(&fs,"0:",1);
+			everRead = 1;
+
 		}
 		
     res_sd = f_open(&fnew , GBKCODE_FILE_NAME, FA_OPEN_EXISTING | FA_READ);
@@ -1066,7 +1077,7 @@ int GetGBKCode_from_sd ( uint8_t * pBuffer, uint16_t c)
     if ( res_sd == FR_OK ) 
     {
         f_lseek (&fnew, pos);		//指针偏移
-        res_sd = f_read( &fnew, pBuffer, 24*24/8, &br );		 //24*24大小的汉字 其字模 占用24*24/8个字节
+        res_sd = f_read( &fnew, pBuffer, macWIDTH_CH_CHAR*macHEIGHT_CH_CHAR/8, &br );		 //24*24大小的汉字 其字模 占用24*24/8个字节
         
         f_close(&fnew);
         

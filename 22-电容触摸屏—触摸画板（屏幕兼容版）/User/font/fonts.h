@@ -92,6 +92,7 @@ extern sFONT Font8x8;
 /*中文字库存储在FLASH的起始地址*/
 /*FLASH*/
 #define GBKCODE_START_ADDRESS   1360*4096
+#define GBKCODE_FILE_NAME       "GB2312_H2424.FON"
 
 
 /*获取字库的函数*/
