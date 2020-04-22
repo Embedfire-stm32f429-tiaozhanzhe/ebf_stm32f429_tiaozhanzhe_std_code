@@ -551,23 +551,26 @@ uint32_t I2C_ReadBytes(uint8_t ClientAddr,uint8_t* pBuffer, uint16_t NumByteToRe
 
 	while(NumByteToRead) 
   {
-   if(NumByteToRead == 1)
+
+   *pBuffer = i2c_ReadByte();
+    
+    if(NumByteToRead == 1)
     {
 			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
       
       /* 发送I2C总线停止信号 */
       i2c_Stop();
     }
-    
-   *pBuffer = i2c_ReadByte();
+    else
+    {
+      i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
+    }
     
     /* 读指针自增 */
     pBuffer++; 
       
     /*计数器自减 */
     NumByteToRead--;
-    
-    i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
   }
 
 	/* 发送I2C总线停止信号 */
