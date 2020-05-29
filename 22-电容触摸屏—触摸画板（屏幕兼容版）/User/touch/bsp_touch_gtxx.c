@@ -796,12 +796,12 @@ Output:
     /* 计算check sum校验值 */
     if(touchIC == GT911 || touchIC == GT9157)
     {
-        for (i = GTP_ADDR_LENGTH; i < cfg_num+GTP_ADDR_LENGTH; i++)
+        for (i = GTP_ADDR_LENGTH; i < cfg_num; i++)
         {
             check_sum += (config[i] & 0xFF);
         }
-        config[ cfg_num+GTP_ADDR_LENGTH] = (~(check_sum & 0xFF)) + 1; 	//checksum
-        config[ cfg_num+GTP_ADDR_LENGTH+1] =  1; 						//refresh 配置更新标志
+        config[ cfg_num] = (~(check_sum & 0xFF)) + 1; 	//checksum
+        config[ cfg_num+1] =  1; 						//refresh 配置更新标志
     }
     else if(touchIC == GT5688 || touchIC == GT917S) 
     {

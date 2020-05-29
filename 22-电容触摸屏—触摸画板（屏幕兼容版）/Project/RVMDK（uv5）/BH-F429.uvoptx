@@ -148,40 +148,7 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>44</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234506</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\F429\base_code_v1\22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉匡紙灞忓箷鍏煎鐗堬級\Project\User\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/main.c\44</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>872</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134222628</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\F429\base_code_v1\22-鐢靛瑙︽懜灞忊€旇Е鎽哥敾鏉匡紙灞忓箷鍏煎鐗堬級\Project\User\touch\bsp_touch_gtxx.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\LCD\../../User/touch/bsp_touch_gtxx.c\872</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
