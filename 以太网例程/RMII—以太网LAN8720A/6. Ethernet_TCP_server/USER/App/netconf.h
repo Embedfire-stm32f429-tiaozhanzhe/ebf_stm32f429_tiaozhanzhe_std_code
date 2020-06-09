@@ -51,7 +51,7 @@
 
 #define DEST_IP_ADDR0               192
 #define DEST_IP_ADDR1               168
-#define DEST_IP_ADDR2                 1
+#define DEST_IP_ADDR2                 0
 #define DEST_IP_ADDR3               102
 
 #define DEST_PORT                  6000
@@ -72,8 +72,8 @@
 /*Static IP ADDRESS: IP_ADDR0.IP_ADDR1.IP_ADDR2.IP_ADDR3 */
 #define IP_ADDR0                    192
 #define IP_ADDR1                    168
-#define IP_ADDR2                      1
-#define IP_ADDR3                    122
+#define IP_ADDR2                      0
+#define IP_ADDR3                    199
 
 /*NETMASK*/
 #define NETMASK_ADDR0               255
@@ -84,7 +84,7 @@
 /*Gateway Address*/
 #define GW_ADDR0                    192
 #define GW_ADDR1                    168
-#define GW_ADDR2                      1
+#define GW_ADDR2                      0
 #define GW_ADDR3                      1
 
 /**

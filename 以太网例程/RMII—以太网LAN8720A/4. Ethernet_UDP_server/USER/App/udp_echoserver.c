@@ -100,8 +100,10 @@ void udp_echoserver_receive_callback(void *arg, struct udp_pcb *upcb, struct pbu
   udp_connect(upcb, addr, UDP_CLIENT_PORT);
    
 	#ifdef SERIAL_DEBUG
+	memset(recdata,'\0',100);
 	memcpy((char *)recdata,p->payload,p->len);
-	printf("upd_rec:%s",recdata);
+	recdata[p->len]='\0';
+	printf("upd_rec:%s\n",recdata);
 	#endif	
   /* Tell the client that we have accepted it */
   udp_send(upcb, p);

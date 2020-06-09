@@ -270,10 +270,12 @@ static err_t tcp_echoserver_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p
 			
 #ifdef SERIAL_DEBUG
 			recdata=(char *)malloc(p->len*sizeof(char));
+			memset(recdata,'\0',p->len*sizeof(char));
 			if(recdata!=NULL)
 			{
 				memcpy(recdata,p->payload,p->len);
-				printf("upd_rec:%s",recdata);
+				recdata[p->len]='\0';
+				printf("upd_rec:%s\n",recdata);
 			}
 			free(recdata);
 #endif
