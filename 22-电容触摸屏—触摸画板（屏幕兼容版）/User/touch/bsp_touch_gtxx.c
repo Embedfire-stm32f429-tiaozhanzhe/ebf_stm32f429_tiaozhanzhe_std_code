@@ -184,13 +184,13 @@ const TOUCH_PARAM_TypeDef touch_param[4] =
 };
 
 static int8_t GTP_I2C_Test(void);
-//static void GT91xx_Config_Read_Proc(void);
 
+#if UPDATE_CONFIG
 static void Delay(__IO uint32_t nCount)	 //简单的延时函数
 {
 	for(; nCount != 0; nCount--);
 }
-
+#endif /* UPDATE_CONFIG */
 
 /**
   * @brief   使用IIC进行数据传输
@@ -739,16 +739,15 @@ Output:
 {
     int32_t ret = -1;
 
+#if UPDATE_CONFIG
     int32_t i = 0;
     uint16_t check_sum = 0;
     int32_t retry = 0;
-
     const uint8_t* cfg_info;
     uint8_t cfg_info_len  ;
 		uint8_t* config;
-
     uint8_t cfg_num =0 ;		//需要配置的寄存器个数
-
+#endif /* UPDATE_CONFIG */
     GTP_DEBUG_FUNC();
 	
     I2C_Touch_Init();
@@ -893,7 +892,8 @@ Output:
 #endif
   free(config);
 	
-#endif
+#endif /* UPDATE_CONFIG */
+
 	 /* emXGUI示例中不使能中断 */
 		GTP_IRQ_Enable();
 	
