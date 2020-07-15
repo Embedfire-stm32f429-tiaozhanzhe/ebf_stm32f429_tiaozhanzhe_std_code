@@ -756,7 +756,7 @@ typedef struct
 
 
 //设置字符串显示方向，注意：超出屏幕的部分不会显示,
-#define SET_DIRECTION 0 //设置范围0-3，可以设置四种方向显示
+#define SET_DIRECTION 1 //设置范围0-3，可以设置四种方向显示
 
 /** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Functions
   * @{

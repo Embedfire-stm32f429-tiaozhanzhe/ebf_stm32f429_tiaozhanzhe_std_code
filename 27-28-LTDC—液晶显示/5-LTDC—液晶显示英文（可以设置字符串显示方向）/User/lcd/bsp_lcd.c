@@ -2174,7 +2174,7 @@ void LCD_DrawSome(uint16_t Xpos, uint16_t Ypos, uint8_t Mode,uint32_t Color)
 				 *(__IO uint16_t*)(videoMemory) = Color;
 		break;		
 		case 2:
-				 videoMemory = CurrentFrameBuffer + (LCD_PIXEL_HEIGHT*LCD_PIXEL_WIDTH - (Xpos + (Ypos* LCD_PIXEL_WIDTH) + 1))*2;
+				 videoMemory = CurrentFrameBuffer + ((LCD_PIXEL_HEIGHT*LCD_PIXEL_WIDTH - (Xpos + (Ypos* LCD_PIXEL_WIDTH) + 1))*2);
 				 *(__IO uint16_t*)(videoMemory) = Color;
 		break;		
 		case 3:
